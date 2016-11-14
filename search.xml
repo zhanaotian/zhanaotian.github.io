@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[Kotlin 准备工作]]></title>
+      <url>%2F2016%2F11%2F15%2FKotlin%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C%2F</url>
+      <content type="text"><![CDATA[Kotlin 准备工作在Android Studio 中安装 Kotlin 插件和Kotlin Android Extensions 插件 Kotlin：这是一个基础的插件。它能让Android Studio懂得Kotlin代码。它会每次在新的Kotlin语言版本发布的时候发布新的插件版本，这样我们可以通过它发现新版本特性和弃用的警告。这是你要使用Kotlin编写Android应用唯一的插件。 Kotlin Android Extensions：Kotlin团队还为Android开发发布了另外一个有趣的插件。这个Android Extensions可以让你自动地从XML中注入所有的View到Activity中，举个例子，你不需要使用findViewById()。你将会立即得到一个从属性转换过来的view。你将需要安装这个插件来使用这个特性。 配置GradleTools –&gt; Kotlin –&gt; configure Kotlin Plugin Updates 转换成Kotlin 代码shift + commend + A 然后选择Code -&gt; Convert Java File to Kotlin File]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Hello World]]></title>
       <url>%2F2016%2F11%2F14%2Fhello-world%2F</url>
       <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment 最近访客]]></content>
