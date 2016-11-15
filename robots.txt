@@ -1,0 +1,16 @@
+# hexo robots.txt
+User-agent: *
+Allow: /
+Allow: /categories/
+Allow: /archives/
+Allow: /tags/
+Allow: /tools/
+Allow: /about/
+Allow: /uploads/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /images/
+Disallow: /js/
+Disallow: /lib/
+Sitemap: http://jkwarthegarden.com/sitemap.xml
+Sitemap: http://jkwarthegarden.com/baidusitemap.xml
