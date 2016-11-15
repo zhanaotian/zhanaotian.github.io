@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-14T21:38:32.000Z</updated>
+  <updated>2016-11-15T07:32:09.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,399 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>总数操作符</title>
+    <link href="http://yoursite.com/2016/11/15/%E6%80%BB%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
+    <id>http://yoursite.com/2016/11/15/总数操作符/</id>
+    <published>2016-11-15T07:29:40.000Z</published>
+    <updated>2016-11-15T07:32:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="总数操作符"><a href="#总数操作符" class="headerlink" title="总数操作符"></a>总数操作符</h1><h4 id="any"><a href="#any" class="headerlink" title="any"></a>any</h4><p>如果至少有一个元素符合给出的判断条件，则返回true。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> list = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</div><div class="line">assertTrue(list.any &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</div><div class="line">assertFalse(list.any &#123; it &gt; <span class="number">10</span> &#125;)</div></pre></td></tr></table></figure>
+<h4 id="all"><a href="#all" class="headerlink" title="all"></a>all</h4><p>如果全部的元素符合给出的判断条件，则返回true。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">assertTrue(list.all &#123; it &lt; <span class="number">10</span> &#125;)</div><div class="line">assertFalse(list.all &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</div></pre></td></tr></table></figure>
+<h4 id="count"><a href="#count" class="headerlink" title="count"></a>count</h4><p>返回符合给出判断条件的元素总数。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">3</span>, list.count &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</div></pre></td></tr></table></figure>
+<h4 id="fold"><a href="#fold" class="headerlink" title="fold"></a>fold</h4><p>在一个初始值的基础上从第一项到最后一项通过一个函数累计所有的元素。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">25</span>, list.fold(<span class="number">4</span>) &#123; total, next -&gt; total + next &#125;)</div></pre></td></tr></table></figure>
+<h4 id="foldRight"><a href="#foldRight" class="headerlink" title="foldRight"></a>foldRight</h4><p>与<code>fold</code>一样，但是顺序是从最后一项到第一项。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">25</span>, list.foldRight(<span class="number">4</span>) &#123; total, next -&gt; total + next &#125;)</div></pre></td></tr></table></figure>
+<h4 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h4><p>遍历所有元素，并执行给定的操作。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">list.forEach &#123; println(it) &#125;</div></pre></td></tr></table></figure>
+<h4 id="forEachIndexed"><a href="#forEachIndexed" class="headerlink" title="forEachIndexed"></a>forEachIndexed</h4><p>与<code>forEach</code>，但是我们同时可以得到元素的index。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list.forEachIndexed &#123; index, value</div><div class="line">		-&gt; println(<span class="string">"position <span class="subst">$index</span> contains a <span class="subst">$value</span>"</span>) &#125;</div></pre></td></tr></table></figure>
+<h4 id="max"><a href="#max" class="headerlink" title="max"></a>max</h4><p>返回最大的一项，如果没有则返回null。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">6</span>, list.max())</div></pre></td></tr></table></figure>
+<h4 id="maxBy"><a href="#maxBy" class="headerlink" title="maxBy"></a>maxBy</h4><p>根据给定的函数返回最大的一项，如果没有则返回null。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// The element whose negative is greater</span></div><div class="line">assertEquals(<span class="number">1</span>, list.maxBy &#123; -it &#125;)</div></pre></td></tr></table></figure>
+<h4 id="min"><a href="#min" class="headerlink" title="min"></a>min</h4><p>返回最小的一项，如果没有则返回null。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">1</span>, list.min())</div></pre></td></tr></table></figure>
+<h4 id="minBy"><a href="#minBy" class="headerlink" title="minBy"></a>minBy</h4><p>根据给定的函数返回最小的一项，如果没有则返回null。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// The element whose negative is smaller</span></div><div class="line">assertEquals(<span class="number">6</span>, list.minBy &#123; -it &#125;)</div></pre></td></tr></table></figure>
+<h4 id="none"><a href="#none" class="headerlink" title="none"></a>none</h4><p>如果没有任何元素与给定的函数匹配，则返回true。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// No elements are divisible by 7</span></div><div class="line">assertTrue(list.none &#123; it % <span class="number">7</span> == <span class="number">0</span> &#125;)</div></pre></td></tr></table></figure>
+<h4 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h4><p>与<code>fold</code>一样，但是没有一个初始值。通过一个函数从第一项到最后一项进行累计。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">21</span>, list.reduce &#123; total, next -&gt; total + next &#125;)</div></pre></td></tr></table></figure>
+<h4 id="reduceRight"><a href="#reduceRight" class="headerlink" title="reduceRight"></a>reduceRight</h4><p>与<code>reduce</code>一样，但是顺序是从最后一项到第一项。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">21</span>, list.reduceRight &#123; total, next -&gt; total + next &#125;)</div></pre></td></tr></table></figure>
+<h4 id="sumBy"><a href="#sumBy" class="headerlink" title="sumBy"></a>sumBy</h4><p>返回所有每一项通过函数转换之后的数据的总和。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">assertEquals(<span class="number">3</span>, list.sumBy &#123; it % <span class="number">2</span> &#125;)</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;总数操作符&quot;&gt;&lt;a href=&quot;#总数操作符&quot; class=&quot;headerlink&quot; title=&quot;总数操作符&quot;&gt;&lt;/a&gt;总数操作符&lt;/h1&gt;&lt;h4 id=&quot;any&quot;&gt;&lt;a href=&quot;#any&quot; class=&quot;headerlink&quot; title=&quot;any&quot;&gt;&lt;/
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>集合和函数操作符</title>
+    <link href="http://yoursite.com/2016/11/15/%E9%9B%86%E5%90%88%E5%92%8C%E5%87%BD%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
+    <id>http://yoursite.com/2016/11/15/集合和函数操作符/</id>
+    <published>2016-11-15T07:29:34.000Z</published>
+    <updated>2016-11-15T07:32:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="集合和函数操作符"><a href="#集合和函数操作符" class="headerlink" title="集合和函数操作符"></a>集合和函数操作符</h1><p>在我们这个项目我们已经使用过集合了，但是现在是时候展示它们结合函数操作符之后有多强大了。关于函数式编程很不错的一点是我们不用去解释我们怎么去做，而是直接说我想做什么。比如，如果我想去过滤一个list，不用去创建一个list，遍历这个list的每一项，然后如果满足一定的条件则放到一个新的集合中，而是直接食用filer函数并指明我想用的过滤器。用这种方式，我们可以节省大量的代码。</p>
+<p>虽然我们可以直接用Java中的集合，但是Kotlin也提供了一些你希望用的本地的接口：</p>
+<ul>
+<li><p>Iterable：父类。所有我们可以遍历一系列的都是实现这个接口。</p>
+</li>
+<li><p>MutableIterable：一个支持遍历的同时可以执行删除的Iterables。</p>
+</li>
+<li><p>Collection：这个类相是一个范性集合。我们通过函数访问可以返回集合的size、是否为空、是否包含一个或者一些item。这个集合的所有方法提供查询，因为connections是不可修改的。</p>
+</li>
+<li><p>MutableCollection：一个支持增加和删除item的Collection。它提供了额外的函数，比如<code>add</code> 、<code>remove</code>、<code>clear</code>等等。</p>
+</li>
+<li><p>List：可能是最流行的集合类型。它是一个范性有序的集合。因为它的有序，我们可以使用<code>get</code>函数通过position来访问。</p>
+</li>
+<li><p>MutableList：一个支持增加和删除item的List。</p>
+</li>
+<li><p>Set：一个无序并不支持重复item的集合。</p>
+</li>
+<li><p>MutableSet：一个支持增加和删除item的Set。</p>
+</li>
+<li><p>Map：一个key-value对的collection。key在map中是唯一的，也就是说不能有两对key是一样的键值对存在于一个map中。</p>
+</li>
+<li><p>MutableMap：一个支持增加和删除item的map。</p>
+</li>
+</ul>
+<p>有很多不同集合可用的函数操作符。我想通过一个例子来展示给你看。知道有哪些可选的操作符是很有用的，因为这样会更容易分辨它们使用的时机。</p>
+<ul>
+<li><p><a href="quiver-note-url/DB0B9591-B7E8-46AE-80A5-D659609371A3">总数操作符</a></p>
+</li>
+<li><p><a href="quiver-note-url/E0BFAF0B-5765-482F-B7BD-3944B47F3528">过滤操作符</a></p>
+</li>
+<li><p><a href="quiver-note-url/671B9DF4-9F29-4FD3-A3D0-0179F53119C9">映射操作符</a></p>
+</li>
+<li><p><a href="quiver-note-url/4025F762-5914-487F-AE50-E694CDD9A486">元素操作符</a></p>
+</li>
+<li><p><a href="quiver-note-url/05D828AB-9AF9-44F6-81CD-241204774313">生产操作符</a></p>
+</li>
+<li><p><a href="quiver-note-url/FC3B8A32-4472-445F-98E2-9B38631AC179">顺序操作符</a></p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;集合和函数操作符&quot;&gt;&lt;a href=&quot;#集合和函数操作符&quot; class=&quot;headerlink&quot; title=&quot;集合和函数操作符&quot;&gt;&lt;/a&gt;集合和函数操作符&lt;/h1&gt;&lt;p&gt;在我们这个项目我们已经使用过集合了，但是现在是时候展示它们结合函数操作符之后有多强大了。关于
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>委托</title>
+    <link href="http://yoursite.com/2016/11/15/%E5%A7%94%E6%89%98/"/>
+    <id>http://yoursite.com/2016/11/15/委托/</id>
+    <published>2016-11-15T07:29:27.000Z</published>
+    <updated>2016-11-15T07:32:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h1><h3 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h3><p>我们可能需要一个属性具有一些相同的行为，使用<code>lazy</code>或者<code>observable</code>可以被很有趣地实现重用。而不是一次又一次地去声明那些相同的代码，Kotlin提供了一个委托属性到一个类的方法。这就是我们知道的<code>委托属性</code>。</p>
+<p>当我们使用属性的<code>get</code>或者<code>set</code>的时候，属性委托的<code>getValue</code>和<code>setValue</code>就会被调用。</p>
+<p>属性委托的结构如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">class Delegate&lt;T&gt; : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">	fun getValue(thisRef: Any?, property: KProperty&lt;*&gt;): T &#123;</div><div class="line">		return ...</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	fun setValue(thisRef: Any?, property: KProperty&lt;*&gt;, value: T) &#123;</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个T是委托属性的类型。<code>getValue</code>函数接收一个类的引用和一个属性的元数据。<code>setValue</code>函数又接收了一个被设置的值。如果这个属性是不可修改（val），就会只有一个<code>getValue</code>函数。</p>
+<p>下面展示属性委托是怎么设置的：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</div><div class="line">	<span class="keyword">var</span> p: String <span class="keyword">by</span> Delegate()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它使用了<code>by</code>这个关键字来指定一个委托对象。</p>
+<h3 id="标准委托"><a href="#标准委托" class="headerlink" title="标准委托"></a>标准委托</h3><p>在Kotlin的标准库中有一系列的标准委托。它们包括了大部分有用的委托，但是我们也可以创建我们自己的委托。</p>
+<h4 id="Lazy"><a href="#Lazy" class="headerlink" title="Lazy"></a>Lazy</h4><p>它包含一个lambda，当第一次执行<code>getValue</code>的时候这个lambda会被调用，所以这个属性可以被延迟初始化。之后的调用都只会返回同一个值。这是非常有趣的特性， 当我们在它们第一次真正调用之前不是必须需要它们的时候。我们可以节省内存，在这些属性真正需要前不进行初始化。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> : <span class="type">Application</span></span>() &#123;</div><div class="line">    <span class="keyword">val</span> database: SQLiteOpenHelper <span class="keyword">by</span> lazy &#123;</div><div class="line">		MyDatabaseHelper(applicationContext)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</div><div class="line">	    <span class="keyword">super</span>.onCreate()</div><div class="line">	    <span class="keyword">val</span> db = database.writableDatabase</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这个例子中，database并没有被真正初始化，直到第一次调用<code>onCreate</code>时。在那之后，我们才确保applicationContext存在，并且已经准备好可以被使用了。<code>lazy</code>操作符是线程安全的。</p>
+<p>如果你不担心多线程问题或者想提高更多的性能，你也可以使用<code>lazy(LazyThreadSafeMode.NONE){ ... }</code>。</p>
+<h4 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h4><p>这个委托会帮我们监测我们希望观察的属性的变化。当被观察属性的<code>set</code>方法被调用的时候，它就会自动执行我们指定的lambda表达式。所以一旦该属性被赋了新的值，我们就会接收到被委托的属性、旧值和新值。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewModel</span></span>(<span class="keyword">val</span> db: MyDatabase) &#123;</div><div class="line">	<span class="keyword">var</span> myProperty <span class="keyword">by</span> Delegates.observable(<span class="string">""</span>) &#123;</div><div class="line">	    d, old, new -&gt;</div><div class="line">	    db.saveChanges(<span class="keyword">this</span>, new)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个例子展示了，一些我们需要关心的ViewMode，每次值被修改了，就会保存它们到数据库。</p>
+<h4 id="Vetoable"><a href="#Vetoable" class="headerlink" title="Vetoable"></a>Vetoable</h4><p>这是一个特殊的<code>observable</code>，它让你决定是否这个值需要被保存。它可以被用于在真正保存之前进行一些条件判断。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> positiveNumber = Delegates.vetoable(<span class="number">0</span>) &#123;</div><div class="line">    d, old, new -&gt;</div><div class="line">	new &gt;= <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面这个委托只允许在新的值是正数的时候执行保存。在lambda中，最后一行表示返回值。你不需要使用return关键字（实质上不能被编译）。</p>
+<h4 id="Not-Null"><a href="#Not-Null" class="headerlink" title="Not Null"></a>Not Null</h4><p>有时候我们需要在某些地方初始化这个属性，但是我们不能在构造函数中确定，或者我们不能在构造函数中做任何事情。第二种情况在Android中很常见：在Activity、fragment、service、receivers……无论如何，一个非抽象的属性在构造函数执行完之前需要被赋值。为了给这些属性赋值，我们无法让它一直等待到我们希望给它赋值的时候。我们至少有两种选择方案。</p>
+<p>第一种就是使用可null类型并且赋值为null，直到我们有了真正想赋的值。但是我们就需要在每个地方不管是否是null都要去检查。如果我们确定这个属性在任何我们使用的时候都不会是null，这可能会使得我们要编写一些必要的代码了。</p>
+<p>第二种选择是使用<code>notNull</code>委托。它会含有一个可null的变量并会在我们设置这个属性的时候分配一个真实的值。如果这个值在被获取之前没有被分配，它就会抛出一个异常。</p>
+<p>这个在单例App这个例子中很有用：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> : <span class="type">Application</span></span>() &#123;</div><div class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</div><div class="line">        <span class="keyword">var</span> instance: App <span class="keyword">by</span> Delegates.notNull()</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.onCreate()</div><div class="line">        instance = <span class="keyword">this</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="从Map中映射值"><a href="#从Map中映射值" class="headerlink" title="从Map中映射值"></a>从Map中映射值</h4><p>另外一种属性委托方式就是，属性的值会从一个map中获取value，属性的名字对应这个map中的key。这个委托可以让我们做一些很强大的事情，因为我们可以很简单地从一个动态地map中创建一个对象实例。如果我们import <code>kotlin.properties.getValue</code>，我们可以从构造函数映射到<code>val</code>属性来得到一个不可修改的map。如果我们想去修改map和属性，我们也可以import <code>kotlin.properties.setValue</code>。类需要一个<code>MutableMap</code>作为构造函数的参数。</p>
+<p>想象我们从一个Json中加载了一个配置类，然后分配它们的key和value到一个map中。我们可以仅仅通过传入一个map的构造函数来创建一个实例：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> kotlin.properties.getValue</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Configuration</span></span>(map: Map&lt;String, Any?&gt;) &#123;</div><div class="line">    <span class="keyword">val</span> width: <span class="built_in">Int</span> <span class="keyword">by</span> map</div><div class="line">    <span class="keyword">val</span> height: <span class="built_in">Int</span> <span class="keyword">by</span> map</div><div class="line">    <span class="keyword">val</span> dp: <span class="built_in">Int</span> <span class="keyword">by</span> map</div><div class="line">    <span class="keyword">val</span> deviceName: String <span class="keyword">by</span> map</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>作为一个参考，这里我展示下对于这个类怎么去创建一个必须要的map：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">conf = Configuration(mapOf(</div><div class="line">    <span class="string">"width"</span> to <span class="number">1080</span>,</div><div class="line">    <span class="string">"height"</span> to <span class="number">720</span>,</div><div class="line">    <span class="string">"dp"</span> to <span class="number">240</span>,</div><div class="line">    <span class="string">"deviceName"</span> to <span class="string">"mydevice"</span></div><div class="line">))</div></pre></td></tr></table></figure>
+<h3 id="自定义的委托"><a href="#自定义的委托" class="headerlink" title="自定义的委托"></a>自定义的委托</h3><p>先来说说我们要实现什么，举个例子，我们创建一个<code>notNull</code>的委托，它只能被赋值一次，如果第二次赋值，它就会抛异常。</p>
+<p>Kotlin库提供了几个接口，我们自己的委托必须要实现：<code>ReadOnlyProperty</code>和<code>ReadWriteProperty</code>。具体取决于我们被委托的对象是<code>val</code>还是<code>var</code>。</p>
+<p>我们要做的第一件事就是创建一个类然后继承<code>ReadWriteProperty</code>：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">NotNullSingleValueVar</span>&lt;<span class="type">T</span>&gt;</span>() : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line"></div><div class="line">		<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;)</span></span>: T &#123;</div><div class="line">	        <span class="keyword">throw</span> UnsupportedOperationException()</div><div class="line">        &#125;</div><div class="line">           </div><div class="line">		<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;, value: <span class="type">T</span>)</span></span> &#123;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个委托可以作用在任何非null的类型。它接收任何类型的引用，然后像getter和setter那样使用T。现在我们需要去实现这些函数。</p>
+<ul>
+<li>Getter函数 如果已经被初始化，则会返回一个值，否则会抛异常。</li>
+<li>Setter函数 如果仍然是null，则赋值，否则会抛异常。</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">NotNullSingleValueVar</span>&lt;<span class="type">T</span>&gt;</span>() : ReadWriteProperty&lt;Any?, T&gt; &#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> value: T? = <span class="literal">null</span></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;)</span></span>: T &#123;</div><div class="line">        <span class="keyword">return</span> value ?: <span class="keyword">throw</span> IllegalStateException(<span class="string">"<span class="subst">$&#123;desc.name&#125;</span> "</span> +</div><div class="line">                <span class="string">"not initialized"</span>)</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setValue</span><span class="params">(thisRef: <span class="type">Any</span>?, property: <span class="type">KProperty</span>&lt;*&gt;, value: <span class="type">T</span>)</span></span> &#123;</div><div class="line">		<span class="keyword">this</span>.value = <span class="keyword">if</span> (<span class="keyword">this</span>.value == <span class="literal">null</span>) value</div><div class="line">		<span class="keyword">else</span> <span class="keyword">throw</span> IllegalStateException(<span class="string">"<span class="subst">$&#123;desc.name&#125;</span> already initialized"</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在你可以创建一个对象，然后添加函数使用你的委托：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">object</span> DelegatesExt &#123;</div><div class="line">    <span class="function"><span class="keyword">fun</span> notNullSingleValue<span class="type">&lt;T&gt;</span><span class="params">()</span></span>:</div><div class="line">            ReadWriteProperty&lt;Any?, T&gt; = NotNullSingleValueVar()</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;委托&quot;&gt;&lt;a href=&quot;#委托&quot; class=&quot;headerlink&quot; title=&quot;委托&quot;&gt;&lt;/a&gt;委托&lt;/h1&gt;&lt;h3 id=&quot;委托属性&quot;&gt;&lt;a href=&quot;#委托属性&quot; class=&quot;headerlink&quot; title=&quot;委托属性&quot;&gt;&lt;/a&gt;委托属性&lt;/h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>操作符表</title>
+    <link href="http://yoursite.com/2016/11/15/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%A1%A8/"/>
+    <id>http://yoursite.com/2016/11/15/操作符表/</id>
+    <published>2016-11-15T07:29:21.000Z</published>
+    <updated>2016-11-15T07:33:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="操作符表"><a href="#操作符表" class="headerlink" title="操作符表"></a>操作符表</h2><p>这里你可以看见一系列包括<code>操作符</code>和<code>对应方法</code>的表。对应方法必须在指定的类中通过各种可能性被实现。</p>
+<p><strong>一元操作符</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+a</td>
+<td>a.unaryPlus()</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>a.unaryMinus()</td>
+</tr>
+<tr>
+<td>!a</td>
+<td>a.not()</td>
+</tr>
+<tr>
+<td>a++</td>
+<td>a.inc()</td>
+</tr>
+<tr>
+<td>a–</td>
+<td>a.dec()</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><strong>二元操作符</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a + b</td>
+<td>a.plus(b)</td>
+</tr>
+<tr>
+<td>a - b</td>
+<td>a.minus(b)</td>
+</tr>
+<tr>
+<td>a * b</td>
+<td>a.times(b)</td>
+</tr>
+<tr>
+<td>a / b</td>
+<td>a.div(b)</td>
+</tr>
+<tr>
+<td>a % b</td>
+<td>a.mod(b)</td>
+</tr>
+<tr>
+<td>a..b</td>
+<td>a.rangeTo(b)</td>
+</tr>
+<tr>
+<td>a in b</td>
+<td>a.contains(b)</td>
+</tr>
+<tr>
+<td>a !in b</td>
+<td>!a.contains(b)</td>
+</tr>
+<tr>
+<td>a += b</td>
+<td>a.plusAssign(b)</td>
+</tr>
+<tr>
+<td>a -= b</td>
+<td>a.minusAssign(b)</td>
+</tr>
+<tr>
+<td>a *= b</td>
+<td>a.timesAssign(b)</td>
+</tr>
+<tr>
+<td>a /= b</td>
+<td>a.divAssign(b)</td>
+</tr>
+<tr>
+<td>a %= b</td>
+<td>a.modAssign(b)</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><strong>数组操作符</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a[i]</td>
+<td>a.get(i)</td>
+</tr>
+<tr>
+<td>a[i, j]</td>
+<td>a.get(i, j)</td>
+</tr>
+<tr>
+<td>a[i_1, …, i_n]</td>
+<td>a.get(i_1, …, i_n)</td>
+</tr>
+<tr>
+<td>a[i] = b</td>
+<td>a.set(i, b)</td>
+</tr>
+<tr>
+<td>a[i, j] = b</td>
+<td>a.set(i, j, b)</td>
+</tr>
+<tr>
+<td>a[i_1, …, i_n] = b</td>
+<td>a.set(i_1, …, i_n, b)</td>
+</tr>
+</tbody>
+</table>
+<p><br><br><strong>等于操作符</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a == b</td>
+<td>a?.equals(b) ?: b === null</td>
+</tr>
+<tr>
+<td>a != b</td>
+<td>!(a?.equals(b) ?: b === null)</td>
+</tr>
+</tbody>
+</table>
+<p>相等操作符有一点不同，为了达到正确合适的相等检查做了更复杂的转换，因为要得到一个确切的函数结构比较，不仅仅是指定的名称。方法必须要如下准确地被实现：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">equals</span><span class="params">(other: <span class="type">Any</span>?)</span></span>: <span class="built_in">Boolean</span></div></pre></td></tr></table></figure>
+<p>操作符<code>===</code>和<code>!==</code>用来做身份检查（它们分别是Java中的<code>==</code>和<code>!=</code>），并且它们不能被重载。</p>
+<p><br><br><strong>函数调用</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>调用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a(i)</td>
+<td>a.invoke(i)</td>
+</tr>
+<tr>
+<td>a(i, j)</td>
+<td>a.invoke(i, j)</td>
+</tr>
+<tr>
+<td>a(i_1, …, i_n)</td>
+<td>a.invoke(i_1, …, i_n)</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;操作符表&quot;&gt;&lt;a href=&quot;#操作符表&quot; class=&quot;headerlink&quot; title=&quot;操作符表&quot;&gt;&lt;/a&gt;操作符表&lt;/h2&gt;&lt;p&gt;这里你可以看见一系列包括&lt;code&gt;操作符&lt;/code&gt;和&lt;code&gt;对应方法&lt;/code&gt;的表。对应方法必须在指定的类中通
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>扩展函数</title>
+    <link href="http://yoursite.com/2016/11/15/%E6%89%A9%E5%B1%95%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2016/11/15/扩展函数/</id>
+    <published>2016-11-15T07:27:29.000Z</published>
+    <updated>2016-11-15T07:50:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h1><p>扩展函数数是指在一个类上增加一种新的行为，甚至我们没有这个类代码的访问权限。这是一个在缺少有用函数的类上扩展的方法。在Java中，通常会实现很多带有static方法的工具类。Kotlin中扩展函数的一个优势是我们不需要在调用方法的时候把整个对象当作参数传入。扩展函数表现得就像是属于这个类的一样，而且我们可以使用<code>this</code>关键字和调用所有public方法。</p>
+<p>举个例子，我们可以创建一个toast函数，这个函数不需要传入任何context，它可以被任何Context或者它的子类调用，比如Activity或者Service：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">fun</span> Context.<span class="title">toast</span><span class="params">(message: <span class="type">CharSequence</span>, duration: <span class="type">Int</span> = Toast.LENGTH_SHORT)</span></span> &#123;</div><div class="line">    Toast.makeText(<span class="keyword">this</span>, message, duration).show()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法可以在Activity内部直接调用：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toast(<span class="string">"Hello world!"</span>)</div><div class="line">toast(<span class="string">"Hello world!"</span>, Toast.LENGTH_LONG)</div></pre></td></tr></table></figure>
+<p>当然，Anko已经包括了自己的toast扩展函数，跟上面这个很相似。Anko提供了一些针对<code>CharSequence</code>和<code>resource</code>的函数，还有两个不同的toast和longToast方法：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">toast(<span class="string">"Hello world!"</span>)</div><div class="line">longToast(R.id.hello_world)</div></pre></td></tr></table></figure>
+<p>扩展函数也可以是一个属性。所以我们可以通过相似的方法来扩展属性。下面的例子展示了使用他自己的getter/setter生成一个属性的方式。Kotlin由于互操作性的特性已经提供了这个属性，但理解扩展属性背后的思想是一个很不错的练习：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">var</span> TextView.text: CharSequence</div><div class="line">    <span class="keyword">get</span>() = getText()</div><div class="line">    <span class="keyword">set</span>(v) = setText(v)</div></pre></td></tr></table></figure>
+<p>扩展函数并不是真正地修改了原来的类，它是以静态导入的方式来实现的。扩展函数可以被声明在任何文件中，因此有个通用的实践是把一系列有关的函数放在一个新建的文件里。</p>
+<p>这是Anko功能背后的魔法。现在通过以上，你也可以自己创建你的魔法。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;扩展函数&quot;&gt;&lt;a href=&quot;#扩展函数&quot; class=&quot;headerlink&quot; title=&quot;扩展函数&quot;&gt;&lt;/a&gt;扩展函数&lt;/h1&gt;&lt;p&gt;扩展函数数是指在一个类上增加一种新的行为，甚至我们没有这个类代码的访问权限。这是一个在缺少有用函数的类上扩展的方法。在Jav
+    
+    </summary>
+    
+      <category term="函数" scheme="http://yoursite.com/categories/%E5%87%BD%E6%95%B0/"/>
+    
+    
+      <category term="Kotlin" scheme="http://yoursite.com/tags/Kotlin/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Kotlin 准备工作</title>
     <link href="http://yoursite.com/2016/11/15/Kotlin%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/"/>
     <id>http://yoursite.com/2016/11/15/Kotlin 准备工作/</id>
     <published>2016-11-14T20:56:16.000Z</published>
-    <updated>2016-11-14T21:38:32.000Z</updated>
+    <updated>2016-11-15T07:49:42.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Kotlin-准备工作"><a href="#Kotlin-准备工作" class="headerlink" title="Kotlin 准备工作"></a>Kotlin 准备工作</h1><p>在Android Studio 中安装 Kotlin 插件和Kotlin Android Extensions 插件</p>
 <p>Kotlin：这是一个基础的插件。它能让Android Studio懂得Kotlin代码。它会每次在新的Kotlin语言版本发布的时候发布新的插件版本，这样我们可以通过它发现新版本特性和弃用的警告。这是你要使用Kotlin编写Android应用唯一的插件。</p>
@@ -35,39 +423,10 @@
     
     </summary>
     
+      <category term="Kotlin" scheme="http://yoursite.com/categories/Kotlin/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2016/11/14/hello-world/"/>
-    <id>http://yoursite.com/2016/11/14/hello-world/</id>
-    <published>2016-11-14T12:36:29.000Z</published>
-    <updated>2016-11-14T20:26:38.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-<blockquote>
-<p>最近访客</p>
-<div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
-
-
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
+      <category term="Kotlin" scheme="http://yoursite.com/tags/Kotlin/"/>
     
   </entry>
   
