@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jkwarthegarden.com/"/>
-  <updated>2016-11-15T07:32:09.000Z</updated>
+  <updated>2016-12-19T08:13:13.000Z</updated>
   <id>http://jkwarthegarden.com/</id>
   
   <author>
@@ -16,11 +16,90 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Android Paint 属性详解</title>
+    <link href="http://jkwarthegarden.com/2016/12/18/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://jkwarthegarden.com/2016/12/18/Android Paint 属性详解/</id>
+    <published>2016-12-18T13:07:57.000Z</published>
+    <updated>2016-12-19T08:13:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Android-Paint-属性详解"><a href="#Android-Paint-属性详解" class="headerlink" title="Android Paint 属性详解"></a>Android Paint 属性详解</h1><p>Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  </p>
+<p>样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  </p>
+<p>大体上可以分为两类,一类与图形绘制相关,一类与文本绘制相关. </p>
+<h3 id="图形绘制"><a href="#图形绘制" class="headerlink" title="图形绘制"></a>图形绘制</h3><ol>
+<li><p>设置绘制的颜色 a代表透明度，r，g，b代表颜色值<br><code>setARGB(int a,int r,int g,int b);</code></p>
+</li>
+<li><p>设置a[0..255] 0：代表全透明  255代表不透明<br><code>setAlpha(int a);</code></p>
+</li>
+<li><p>设置绘制的颜色,使用颜色值来表示,该颜色值包括透明度和RGB    颜色<br><code>setColor(int color)</code></p>
+</li>
+<li><p>设置是否使用抗锯齿功能,会消耗较大资源,绘制图形速度会变慢<br><code>setAntiAlias(boolean aa);</code></p>
+</li>
+<li><p>设置是否使用图像抖动处理,会使绘制出来的图片颜色更加平滑    和饱满,图像更加清晰<br><code>setDither(boolean dither);</code></p>
+</li>
+<li><p>如果该项设置为true,则图像在动画进行中会滤掉对Bitmap图像    的优化操作,加快显示速度,本设置项依赖于dither和xfermode的    设置<br><code>setFilterBitmap(boolean filter);</code></p>
+</li>
+<li><p>设置MaskFilter,可以用不同的MaskFilter实现滤镜的效果,如滤化,立体等<br><code>setMaskFilter(MaskFilter maskfilter);</code></p>
+</li>
+<li><p>设置颜色过滤器,可以在绘制颜色时实现不用颜色的变换效果<br><code>setColorFilter(ColorFilter colorfilter);</code></p>
+</li>
+<li><p>设置绘制路径的效果,如点画线等<br><code>setPathEffect(PathEffect effect);</code>  </p>
+</li>
+<li><p>设置图像效果,使用Shader可以绘制出各种渐变效果<br><code>setShader(Shader shader);</code></p>
+</li>
+<li><p>在图形下面设置阴影层,产生阴影效果,radius为阴影的角度,dx和dy为阴影在x轴和y轴上的距离,color为阴影的颜色<br><code>setShadowLayer(float radius ,float dx,float dy,int color);</code></p>
+</li>
+<li><p>设置画笔的样式,为FILL,FILL_OR_STROKE,或STROKE<br><code>setStyle(Paint.Style style);</code></p>
+</li>
+<li><p>设置画笔的图形样式，如圆形样式Cap.ROUND,或方形样式Cap.SQUARE<br><code>setStrokeCap(Paint.Cap cap);</code></p>
+</li>
+<li><p>设置画笔绘制时各图形的结合方式，如平滑效果等<br><code>setSrokeJoin(Paint.Join join);</code></p>
+</li>
+<li><p>设置画笔的粗细度<br><code>setStrokeWidth(float width);</code></p>
+</li>
+<li><p>设置图形重叠时的处理方式，如合并，取交集或并集，经常用来制作橡皮的擦除效果<br><code>setSrokeJoin(Paint.Join join);</code></p>
+</li>
+</ol>
+<h3 id="文本绘制"><a href="#文本绘制" class="headerlink" title="文本绘制"></a>文本绘制</h3><ol>
+<li><p>模拟实现粗体文字，设置在小字体上效果会非常差.<br>‘setXfermode(Xfermode xfermode);’</p>
+</li>
+<li><p>设置该项为true，将有助于文本在LCD屏幕上的显示效果.<br><code>setSubpixelText(boolean subpixelText);</code></p>
+</li>
+<li><p>设置绘制文字的对齐方向.<br><code>setTextAlign(Paint.Align align);</code></p>
+</li>
+<li><p>设置绘制文字x轴的缩放比例，可以实现文字的拉伸的效果<br><code>setTextScaleX(float scaleX);</code></p>
+</li>
+<li><p>设置绘制文字的字号大小.<br><code>setTextSize(float textSize);</code></p>
+</li>
+<li><p>设置斜体文字，skewX为倾斜弧度.<br><code>setTextSkewX(float skewX);</code></p>
+</li>
+<li><p>设置Typeface对象,即字体风格,包括粗体,斜体以及衬线体,非衬线体等.<br><code>setTypeface(Typeface typeface);</code></p>
+</li>
+<li><p>设置带有下划线的文字效果.<br><code>setUnderlineText(boolean underlineText);</code></p>
+</li>
+<li><p>设置带有删除线的效果.<br><code>setStrikeThruText(boolean strikeThruText);</code></p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Android-Paint-属性详解&quot;&gt;&lt;a href=&quot;#Android-Paint-属性详解&quot; class=&quot;headerlink&quot; title=&quot;Android Paint 属性详解&quot;&gt;&lt;/a&gt;Android Paint 属性详解&lt;/h1&gt;&lt;p&gt;Paint即
+    
+    </summary>
+    
+      <category term="Android 视图" scheme="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+    
+    
+      <category term="Paint" scheme="http://jkwarthegarden.com/tags/Paint/"/>
+    
+  </entry>
+  
+  <entry>
     <title>总数操作符</title>
     <link href="http://jkwarthegarden.com/2016/11/15/%E6%80%BB%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
     <id>http://jkwarthegarden.com/2016/11/15/总数操作符/</id>
     <published>2016-11-15T07:29:40.000Z</published>
-    <updated>2016-11-15T07:32:09.000Z</updated>
+    <updated>2016-12-19T07:51:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="总数操作符"><a href="#总数操作符" class="headerlink" title="总数操作符"></a>总数操作符</h1><h4 id="any"><a href="#any" class="headerlink" title="any"></a>any</h4><p>如果至少有一个元素符合给出的判断条件，则返回true。</p>
 <figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> list = listOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</div><div class="line">assertTrue(list.any &#123; it % <span class="number">2</span> == <span class="number">0</span> &#125;)</div><div class="line">assertFalse(list.any &#123; it &gt; <span class="number">10</span> &#125;)</div></pre></td></tr></table></figure>
@@ -59,6 +138,10 @@
     
     </summary>
     
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/tags/Kotlin/"/>
     
   </entry>
   
@@ -67,7 +150,7 @@
     <link href="http://jkwarthegarden.com/2016/11/15/%E9%9B%86%E5%90%88%E5%92%8C%E5%87%BD%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/"/>
     <id>http://jkwarthegarden.com/2016/11/15/集合和函数操作符/</id>
     <published>2016-11-15T07:29:34.000Z</published>
-    <updated>2016-11-15T07:32:41.000Z</updated>
+    <updated>2016-12-19T07:51:38.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="集合和函数操作符"><a href="#集合和函数操作符" class="headerlink" title="集合和函数操作符"></a>集合和函数操作符</h1><p>在我们这个项目我们已经使用过集合了，但是现在是时候展示它们结合函数操作符之后有多强大了。关于函数式编程很不错的一点是我们不用去解释我们怎么去做，而是直接说我想做什么。比如，如果我想去过滤一个list，不用去创建一个list，遍历这个list的每一项，然后如果满足一定的条件则放到一个新的集合中，而是直接食用filer函数并指明我想用的过滤器。用这种方式，我们可以节省大量的代码。</p>
 <p>虽然我们可以直接用Java中的集合，但是Kotlin也提供了一些你希望用的本地的接口：</p>
@@ -116,6 +199,10 @@
     
     </summary>
     
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/tags/Kotlin/"/>
     
   </entry>
   
@@ -124,7 +211,7 @@
     <link href="http://jkwarthegarden.com/2016/11/15/%E5%A7%94%E6%89%98/"/>
     <id>http://jkwarthegarden.com/2016/11/15/委托/</id>
     <published>2016-11-15T07:29:27.000Z</published>
-    <updated>2016-11-15T07:32:28.000Z</updated>
+    <updated>2016-12-19T07:51:12.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="委托"><a href="#委托" class="headerlink" title="委托"></a>委托</h1><h3 id="委托属性"><a href="#委托属性" class="headerlink" title="委托属性"></a>委托属性</h3><p>我们可能需要一个属性具有一些相同的行为，使用<code>lazy</code>或者<code>observable</code>可以被很有趣地实现重用。而不是一次又一次地去声明那些相同的代码，Kotlin提供了一个委托属性到一个类的方法。这就是我们知道的<code>委托属性</code>。</p>
 <p>当我们使用属性的<code>get</code>或者<code>set</code>的时候，属性委托的<code>getValue</code>和<code>setValue</code>就会被调用。</p>
@@ -174,6 +261,10 @@
     
     </summary>
     
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/tags/Kotlin/"/>
     
   </entry>
   
@@ -182,7 +273,7 @@
     <link href="http://jkwarthegarden.com/2016/11/15/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%A1%A8/"/>
     <id>http://jkwarthegarden.com/2016/11/15/操作符表/</id>
     <published>2016-11-15T07:29:21.000Z</published>
-    <updated>2016-11-15T07:33:07.000Z</updated>
+    <updated>2016-12-19T07:51:48.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="操作符表"><a href="#操作符表" class="headerlink" title="操作符表"></a>操作符表</h2><p>这里你可以看见一系列包括<code>操作符</code>和<code>对应方法</code>的表。对应方法必须在指定的类中通过各种可能性被实现。</p>
 <p><strong>一元操作符</strong></p>
@@ -367,6 +458,10 @@
     
     </summary>
     
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/categories/Kotlin/"/>
+    
+    
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/tags/Kotlin/"/>
     
   </entry>
   
@@ -375,7 +470,7 @@
     <link href="http://jkwarthegarden.com/2016/11/15/%E6%89%A9%E5%B1%95%E5%87%BD%E6%95%B0/"/>
     <id>http://jkwarthegarden.com/2016/11/15/扩展函数/</id>
     <published>2016-11-15T07:27:29.000Z</published>
-    <updated>2016-11-15T07:50:04.000Z</updated>
+    <updated>2016-12-19T07:51:29.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h1><p>扩展函数数是指在一个类上增加一种新的行为，甚至我们没有这个类代码的访问权限。这是一个在缺少有用函数的类上扩展的方法。在Java中，通常会实现很多带有static方法的工具类。Kotlin中扩展函数的一个优势是我们不需要在调用方法的时候把整个对象当作参数传入。扩展函数表现得就像是属于这个类的一样，而且我们可以使用<code>this</code>关键字和调用所有public方法。</p>
 <p>举个例子，我们可以创建一个toast函数，这个函数不需要传入任何context，它可以被任何Context或者它的子类调用，比如Activity或者Service：</p>
@@ -396,7 +491,7 @@
     
     </summary>
     
-      <category term="函数" scheme="http://jkwarthegarden.com/categories/%E5%87%BD%E6%95%B0/"/>
+      <category term="Kotlin" scheme="http://jkwarthegarden.com/categories/Kotlin/"/>
     
     
       <category term="Kotlin" scheme="http://jkwarthegarden.com/tags/Kotlin/"/>
