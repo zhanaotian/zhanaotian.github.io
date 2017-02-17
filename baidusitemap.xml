@@ -4,12 +4,32 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2017/02/17/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-02-17T07:36:34.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2016/01/10/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2017-02-17T09:53:16.000Z</lastmod>
     <data>
         <display>
         <title>Android Paint 属性详解</title>
-        <pubTime>2017-02-17T07:36:01.000Z</pubTime>
+        <pubTime>2016-01-09T17:34:14.000Z</pubTime>
+        
+        <tag>Paint</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android 视图" url="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2016/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-02-17T09:47:08.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android Paint 属性详解</title>
+        <pubTime>2016-01-18T16:34:14.000Z</pubTime>
         
         <tag>Paint</tag>
          
