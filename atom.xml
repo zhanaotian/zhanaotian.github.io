@@ -550,7 +550,7 @@
     <link href="http://jkwarthegarden.com/2016/01/10/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/"/>
     <id>http://jkwarthegarden.com/2016/01/10/Android 导航栏和状态栏操作/</id>
     <published>2016-01-09T17:34:14.000Z</published>
-    <updated>2017-02-17T09:53:16.000Z</updated>
+    <updated>2017-02-17T09:55:22.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Android-导航栏和状态栏操作"><a href="#Android-导航栏和状态栏操作" class="headerlink" title="Android 导航栏和状态栏操作"></a>Android 导航栏和状态栏操作</h1><p>###淡化状态栏和系统栏</p>
 <blockquote>
@@ -558,6 +558,7 @@
 </blockquote>
 <p>  <code>decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);</code></p>
 <p>####显示状态栏与导航栏<br>  <code>decorView.setSystemUiVisibility(0);</code></p>
+<a id="more"></a>
 <p>###隐藏状态栏</p>
 <ol>
 <li><p>在4.0及以下版本中隐藏状态栏有2种方法</p>
@@ -594,7 +595,12 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;Android-导航栏和状态栏操作&quot;&gt;&lt;a href=&quot;#Android-导航栏和状态栏操作&quot; class=&quot;headerlink&quot; title=&quot;Android 导航栏和状态栏操作&quot;&gt;&lt;/a&gt;Android 导航栏和状态栏操作&lt;/h1&gt;&lt;p&gt;###淡化状态栏和系
+      &lt;h1 id=&quot;Android-导航栏和状态栏操作&quot;&gt;&lt;a href=&quot;#Android-导航栏和状态栏操作&quot; class=&quot;headerlink&quot; title=&quot;Android 导航栏和状态栏操作&quot;&gt;&lt;/a&gt;Android 导航栏和状态栏操作&lt;/h1&gt;&lt;p&gt;###淡化状态栏和系统栏&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  &lt;code&gt;decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;####显示状态栏与导航栏&lt;br&gt;  &lt;code&gt;decorView.setSystemUiVisibility(0);&lt;/code&gt;&lt;/p&gt;
     
     </summary>
     
