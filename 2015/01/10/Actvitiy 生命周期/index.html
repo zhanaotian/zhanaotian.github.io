@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Activity," />
 
 
 
@@ -108,15 +108,37 @@
 
 
 
-<meta name="description" content="Actions speak louder than words">
-<meta property="og:type" content="website">
-<meta property="og:title" content="jkwarthegarden">
-<meta property="og:url" content="http://jkwarthegarden.com/categories/Kotlin/index.html">
+<meta name="description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity 生命周期">
+<meta property="og:url" content="http://jkwarthegarden.com/2015/01/10/Actvitiy 生命周期/index.html">
 <meta property="og:site_name" content="jkwarthegarden">
-<meta property="og:description" content="Actions speak louder than words">
+<meta property="og:description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png">
+<meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png">
+<meta property="og:updated_time" content="2017-03-10T04:21:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jkwarthegarden">
-<meta name="twitter:description" content="Actions speak louder than words">
+<meta name="twitter:title" content="Activity 生命周期">
+<meta name="twitter:description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta name="twitter:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png">
 
 
 
@@ -133,7 +155,7 @@
     }
   };
 </script>
-  <title> 分类: Kotlin | jkwarthegarden </title>
+  <title> Activity 生命周期 | jkwarthegarden </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -164,7 +186,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -295,187 +317,221 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Kotlin
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/总数操作符/" itemprop="url">
-              
-                <span itemprop="name">总数操作符</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T15:29:40+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/集合和函数操作符/" itemprop="url">
-              
-                <span itemprop="name">集合和函数操作符</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T15:29:34+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/委托/" itemprop="url">
-              
-                <span itemprop="name">委托</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T15:29:27+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/操作符表/" itemprop="url">
-              
-                <span itemprop="name">操作符表</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T15:29:21+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/扩展函数/" itemprop="url">
-              
-                <span itemprop="name">扩展函数</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T15:27:29+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/15/Kotlin 准备工作/" itemprop="url">
-              
-                <span itemprop="name">Kotlin 准备工作</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-15T04:56:16+08:00"
-              content="2016-11-15" >
-          11-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Activity 生命周期
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-10T01:34:14+08:00" content="2015-01-10">
+              2015-01-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android-视图/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 视图</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/10/Actvitiy 生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/10/Actvitiy 生命周期/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+         <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">字数统计:</span>
+           <span class="post-count">797(字)</span>
+           
+         </span>
+    
+      <span class="post-time">
+     &nbsp; | &nbsp;
+           <span class="post-meta-item-icon">
+             <i class="fa fa-calendar-o"></i>
+           </span>
+           <span class="post-meta-item-text">阅读时长:</span>
+           <span class="post-count">3(分)</span>
+           
+         </span>
+       
+
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
+<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+</blockquote>
+<ul>
+<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
+</li>
+<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
+</li>
+<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
+<a id="more"></a>  
+</li>
+</ul>
+<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
+<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
+<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
+</blockquote>
+<ul>
+<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
+</li>
+<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
+</li>
+</ul>
+<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
+<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
+</blockquote>
+<ul>
+<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
+</li>
+<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画或）。</p>
+</li>
+</ul>
+<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
+<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
+</blockquote>
+<ul>
+<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
+</li>
+<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
+</li>
+</ul>
+<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
+<blockquote>
+<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
+<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
+<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
+</blockquote>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Activity/" rel="tag">#Activity</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/10/Android 导航栏和状态栏操作/" rel="next" title="Android 导航栏和状态栏操作">
+                <i class="fa fa-chevron-left"></i> Android 导航栏和状态栏操作
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/19/Android Paint 属性详解/" rel="prev" title="Android Paint 属性详解">
+                Android Paint 属性详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -483,6 +539,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/01/10/Actvitiy 生命周期/"
+           data-title="Activity 生命周期" data-url="http://jkwarthegarden.com/2015/01/10/Actvitiy 生命周期/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -502,8 +566,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -514,7 +587,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -522,7 +595,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -580,6 +653,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-生命周期"><span class="nav-number">1.</span> <span class="nav-text">Activity 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actvitiy-生命周期图"><span class="nav-number">2.</span> <span class="nav-text">Actvitiy 生命周期图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动与销毁Activity的过程"><span class="nav-number">2.1.</span> <span class="nav-text">启动与销毁Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停与恢复Activity的过程"><span class="nav-number">2.2.</span> <span class="nav-text">暂停与恢复Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止与重启Activity的过程"><span class="nav-number">2.3.</span> <span class="nav-text">停止与重启Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新创建Activity"><span class="nav-number">2.4.</span> <span class="nav-text">重新创建Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">2.4.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -676,6 +760,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

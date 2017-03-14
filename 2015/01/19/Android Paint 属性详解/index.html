@@ -90,7 +90,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Kotlin," />
+  <meta name="keywords" content="Paint," />
 
 
 
@@ -108,16 +108,22 @@
 
 
 
-<meta name="description" content="这里你可以看见一系列包括操作符和对应方法的表。对应方法必须在指定的类中通过各种可能性被实现。">
+<meta name="description" content="Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  
+样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  
+大体上可以分为两类,一类与图形绘制相关,一类与文本绘制相关.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="操作符表">
-<meta property="og:url" content="http://jkwarthegarden.com/2016/11/15/操作符表/index.html">
+<meta property="og:title" content="Android Paint 属性详解">
+<meta property="og:url" content="http://jkwarthegarden.com/2015/01/19/Android Paint 属性详解/index.html">
 <meta property="og:site_name" content="jkwarthegarden">
-<meta property="og:description" content="这里你可以看见一系列包括操作符和对应方法的表。对应方法必须在指定的类中通过各种可能性被实现。">
-<meta property="og:updated_time" content="2016-12-20T07:46:58.000Z">
+<meta property="og:description" content="Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  
+样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  
+大体上可以分为两类,一类与图形绘制相关,一类与文本绘制相关.">
+<meta property="og:updated_time" content="2017-03-09T05:43:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="操作符表">
-<meta name="twitter:description" content="这里你可以看见一系列包括操作符和对应方法的表。对应方法必须在指定的类中通过各种可能性被实现。">
+<meta name="twitter:title" content="Android Paint 属性详解">
+<meta name="twitter:description" content="Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  
+样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  
+大体上可以分为两类,一类与图形绘制相关,一类与文本绘制相关.">
 
 
 
@@ -134,7 +140,7 @@
     }
   };
 </script>
-  <title> 操作符表 | jkwarthegarden </title>
+  <title> Android Paint 属性详解 | jkwarthegarden </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -317,7 +323,7 @@
             
             
               
-                操作符表
+                Android Paint 属性详解
               
             
           </h1>
@@ -329,8 +335,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-15T15:29:21+08:00" content="2016-11-15">
-              2016-11-15
+            <time itemprop="dateCreated" datetime="2015-01-19T00:34:14+08:00" content="2015-01-19">
+              2015-01-19
             </time>
           </span>
 
@@ -343,8 +349,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Kotlin/" itemprop="url" rel="index">
-                    <span itemprop="name">Kotlin</span>
+                  <a href="/categories/Android-绘图/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 绘图</span>
                   </a>
                 </span>
 
@@ -361,8 +367,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/15/操作符表/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/15/操作符表/" itemprop="commentsCount"></span>
+                <a href="/2015/01/19/Android Paint 属性详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/19/Android Paint 属性详解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -379,7 +385,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">字数统计:</span>
-           <span class="post-count">336(字)</span>
+           <span class="post-count">938(字)</span>
            
          </span>
     
@@ -389,7 +395,7 @@
              <i class="fa fa-calendar-o"></i>
            </span>
            <span class="post-meta-item-text">阅读时长:</span>
-           <span class="post-count">2(分)</span>
+           <span class="post-count">4(分)</span>
            
          </span>
        
@@ -407,182 +413,74 @@
       
 
       
-        <p>这里你可以看见一系列包括<code>操作符</code>和<code>对应方法</code>的表。对应方法必须在指定的类中通过各种可能性被实现。</p>
+        <p>Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  </p>
+<p>样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  </p>
+<p>大体上可以分为两类,一类与图形绘制相关,一类与文本绘制相关. </p>
 <a id="more"></a>
-<p><strong>一元操作符</strong></p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>+a</td>
-<td>a.unaryPlus()</td>
-</tr>
-<tr>
-<td>-a</td>
-<td>a.unaryMinus()</td>
-</tr>
-<tr>
-<td>!a</td>
-<td>a.not()</td>
-</tr>
-<tr>
-<td>a++</td>
-<td>a.inc()</td>
-</tr>
-<tr>
-<td>a–</td>
-<td>a.dec()</td>
-</tr>
-</tbody>
-</table>
-<p><br><br><strong>二元操作符</strong></p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a + b</td>
-<td>a.plus(b)</td>
-</tr>
-<tr>
-<td>a - b</td>
-<td>a.minus(b)</td>
-</tr>
-<tr>
-<td>a * b</td>
-<td>a.times(b)</td>
-</tr>
-<tr>
-<td>a / b</td>
-<td>a.div(b)</td>
-</tr>
-<tr>
-<td>a % b</td>
-<td>a.mod(b)</td>
-</tr>
-<tr>
-<td>a..b</td>
-<td>a.rangeTo(b)</td>
-</tr>
-<tr>
-<td>a in b</td>
-<td>a.contains(b)</td>
-</tr>
-<tr>
-<td>a !in b</td>
-<td>!a.contains(b)</td>
-</tr>
-<tr>
-<td>a += b</td>
-<td>a.plusAssign(b)</td>
-</tr>
-<tr>
-<td>a -= b</td>
-<td>a.minusAssign(b)</td>
-</tr>
-<tr>
-<td>a *= b</td>
-<td>a.timesAssign(b)</td>
-</tr>
-<tr>
-<td>a /= b</td>
-<td>a.divAssign(b)</td>
-</tr>
-<tr>
-<td>a %= b</td>
-<td>a.modAssign(b)</td>
-</tr>
-</tbody>
-</table>
-<p><br><br><strong>数组操作符</strong></p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a[i]</td>
-<td>a.get(i)</td>
-</tr>
-<tr>
-<td>a[i, j]</td>
-<td>a.get(i, j)</td>
-</tr>
-<tr>
-<td>a[i_1, …, i_n]</td>
-<td>a.get(i_1, …, i_n)</td>
-</tr>
-<tr>
-<td>a[i] = b</td>
-<td>a.set(i, b)</td>
-</tr>
-<tr>
-<td>a[i, j] = b</td>
-<td>a.set(i, j, b)</td>
-</tr>
-<tr>
-<td>a[i_1, …, i_n] = b</td>
-<td>a.set(i_1, …, i_n, b)</td>
-</tr>
-</tbody>
-</table>
-<p><br><br><strong>等于操作符</strong></p>
-<table>
-<thead>
-<tr>
-<th>操作符</th>
-<th>函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a == b</td>
-<td>a?.equals(b) ?: b === null</td>
-</tr>
-<tr>
-<td>a != b</td>
-<td>!(a?.equals(b) ?: b === null)</td>
-</tr>
-</tbody>
-</table>
-<p>相等操作符有一点不同，为了达到正确合适的相等检查做了更复杂的转换，因为要得到一个确切的函数结构比较，不仅仅是指定的名称。方法必须要如下准确地被实现：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> <span class="title">equals</span><span class="params">(other: <span class="type">Any</span>?)</span></span>: <span class="built_in">Boolean</span></div></pre></td></tr></table></figure>
-<p>操作符<code>===</code>和<code>!==</code>用来做身份检查（它们分别是Java中的<code>==</code>和<code>!=</code>），并且它们不能被重载。</p>
-<p><br><br><strong>函数调用</strong></p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>调用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a(i)</td>
-<td>a.invoke(i)</td>
-</tr>
-<tr>
-<td>a(i, j)</td>
-<td>a.invoke(i, j)</td>
-</tr>
-<tr>
-<td>a(i_1, …, i_n)</td>
-<td>a.invoke(i_1, …, i_n)</td>
-</tr>
-</tbody>
-</table>
+<h4 id="图形绘制"><a href="#图形绘制" class="headerlink" title="图形绘制"></a>图形绘制</h4><ol>
+<li><p>设置Paint的标志<br>Paint.ANTI_ALIAS_FLAG 抗锯齿, Paint.FILTER_BITMAP_FLAG 位图过滤器,<br>Paint.DITHER_FLAG 防抖动,   Paint.UNDERLINE_TEXT_FLAG 启用下划线,<br>Paint.STRIKE_THRU_TEXT_FLAG 启用中划线, Paint.FAKE_BOLD_TEXT_FLAG 加粗文本<br>Paint.LINEAR_TEXT_FLAG 线性文本, Paint.SUBPIXEL_TEXT_FLAG 应用子像素抗锯齿效果<br>Paint.DEV_KERN_TEXT_FLAG 使用设备的文本字距。</p>
+</li>
+<li><p>设置绘制的颜色 a代表透明度，r，g，b代表颜色值。<br><code>setARGB(int a,int r,int g,int b);</code></p>
+</li>
+<li><p>设置a[0..255] 0：代表全透明  255代表不透明。<br><code>setAlpha(int a);</code></p>
+</li>
+<li><p>设置绘制的颜色,使用颜色值来表示,该颜色值包括透明度和RGB颜色。<br><code>setColor(int color)</code></p>
+</li>
+<li><p>设置是否使用抗锯齿功能,会消耗较大资源,绘制图形速度会变慢。<br><code>setAntiAlias(boolean aa);</code></p>
+</li>
+<li><p>设置是否使用图像抖动处理,会使绘制出来的图片颜色更加平滑和饱满,图像更加清晰。<br><code>setDither(boolean dither);</code></p>
+</li>
+<li><p>设置画笔的隐藏模式,INTING_OFF 或者 HINTING_ON。<br><code>setHinting(int mode)</code></p>
+</li>
+<li><p>如果该项设置为true,则图像在动画进行中会滤掉对Bitmap图像      的优化操作,加快显示速度,本设置项依赖于dither和xfermode的设置<br><code>setFilterBitmap(boolean filter);</code></p>
+</li>
+<li><p>设置MaskFilter,可以用不同的MaskFilter实现滤镜的效果,如滤化,立体等。<br><code>setMaskFilter(MaskFilter maskfilter);</code></p>
+</li>
+<li><p>设置颜色过滤器,可以在绘制颜色时实现不用颜色的变换效果。<br><code>setColorFilter(ColorFilter colorfilter);</code></p>
+</li>
+<li><p>设置绘制路径的效果,如点画线等。<br><code>setPathEffect(PathEffect effect);</code>  </p>
+</li>
+<li><p>设置图像效果,使用Shader可以绘制出各种渐变效果。<br><code>setShader(Shader shader);</code></p>
+</li>
+<li><p>在图形下面设置阴影层,产生阴影效果,radius为阴影的角度,dx和dy为阴影在x轴和y轴上的距离,       color为阴影的颜色。<br><code>setShadowLayer(float radius ,float dx,float dy,int color);</code></p>
+</li>
+<li><p>设置画笔的样式,为FILL 描边,FILL_OR_STROKE 描边并填充,或STROKE 填充。<br><code>setStyle(Paint.Style style);</code></p>
+</li>
+<li><p>设置画笔的笔触风格，如圆形样式Cap.ROUND,或方形样式Cap.SQUARE,默认是Paint.Cap.BUTT,也是方形样式。<br><code>setStrokeCap(Paint.Cap cap);</code></p>
+</li>
+<li><p>设置接合处的形态，如Join.MITER 锐角,Join.ROUND 圆弧,Join.BEVEL 直线。<br><code>setStrokeJoin(Paint.Join join);</code></p>
+</li>
+<li><p>设置笔画的倾斜度,取值：&gt;=0,设置笔触的连接处的样式,可以和setStrokeJoin()来比较。<br><code>setStrokeMiter(float miter )</code></p>
+</li>
+<li><p>设置画笔的粗细度。<br><code>setStrokeWidth(float width);</code></p>
+</li>
+</ol>
+<h4 id="文本绘制"><a href="#文本绘制" class="headerlink" title="文本绘制"></a>文本绘制</h4><ol>
+<li><p>模拟实现粗体文字，设置在小字体上效果会非常差。<br>‘setXfermode(Xfermode xfermode);’</p>
+</li>
+<li><p>设置该项为true，将有助于文本在LCD屏幕上的显示效果。<br><code>setSubpixelText(boolean subpixelText);</code></p>
+</li>
+<li><p>设置绘制文字的对齐方向。<br><code>setTextAlign(Paint.Align align);</code></p>
+</li>
+<li><p>设置绘制文字x轴的缩放比例，可以实现文字的拉伸的效果 。<br><code>setTextScaleX(float scaleX);</code></p>
+</li>
+<li><p>设置绘制文字的字号大小,设置值必须大于0。<br><code>setTextSize(float textSize);</code></p>
+</li>
+<li><p>设置斜体文字，skewX为倾斜弧度,值为右负左正,官方推崇的值为-0.25。<br><code>setTextSkewX(float skewX);</code></p>
+</li>
+<li><p>设置Typeface对象,即字体风格,包括粗体,斜体以及衬线体,非衬线体等。<br><code>setTypeface(Typeface typeface);</code></p>
+</li>
+<li><p>设置带有下划线的文字效果。<br><code>setUnderlineText(boolean underlineText);</code></p>
+</li>
+<li><p>设置带有删除线的效果。<br><code>setStrikeThruText(boolean strikeThruText);</code></p>
+</li>
+<li><p>设置是否打开线性文本标识。<br><code>setLinearText (boolean linearText)</code></p>
+</li>
+<li><p>设置地理位置,直接传入Locale.getDefault()。<br><code>setTextLocale (Locale locale)</code></p>
+</li>
+<li><p>设置字体的样式,样式可以为null。<br><code>setFontFeatureSettings(String settings)</code></p>
+</li>
+</ol>
 
       
     </div>
@@ -604,7 +502,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Kotlin/" rel="tag">#Kotlin</a>
+            <a href="/tags/Paint/" rel="tag">#Paint</a>
           
         </div>
       
@@ -613,16 +511,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/15/扩展函数/" rel="next" title="扩展函数">
-                <i class="fa fa-chevron-left"></i> 扩展函数
+              <a href="/2015/01/10/Actvitiy 生命周期/" rel="next" title="Activity 生命周期">
+                <i class="fa fa-chevron-left"></i> Activity 生命周期
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/15/委托/" rel="prev" title="委托">
-                委托 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/04/08/Android 半通明状态栏/" rel="prev" title="Android 半通明状态栏">
+                Android 半通明状态栏 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -649,8 +547,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/15/操作符表/"
-           data-title="操作符表" data-url="http://jkwarthegarden.com/2016/11/15/操作符表/">
+      <div class="ds-thread" data-thread-key="2015/01/19/Android Paint 属性详解/"
+           data-title="Android Paint 属性详解" data-url="http://jkwarthegarden.com/2015/01/19/Android Paint 属性详解/">
       </div>
     
   </div>
@@ -695,7 +593,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -703,7 +601,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -768,7 +666,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#图形绘制"><span class="nav-number">1.</span> <span class="nav-text">图形绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本绘制"><span class="nav-number">2.</span> <span class="nav-text">文本绘制</span></a></li></ol></div>
             
           </div>
         </section>

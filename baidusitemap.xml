@@ -4,12 +4,32 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2016/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2017-02-24T10:07:02.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2015/01/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2017-03-10T04:21:01.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity 生命周期</title>
+        <pubTime>2015-01-09T17:34:14.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android 视图" url="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2015/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-03-09T05:43:52.000Z</lastmod>
     <data>
         <display>
         <title>Android Paint 属性详解</title>
-        <pubTime>2016-01-18T16:34:14.000Z</pubTime>
+        <pubTime>2015-01-18T16:34:14.000Z</pubTime>
         
         <tag>Paint</tag>
          
@@ -24,12 +44,12 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2016/01/10/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2017-02-19T18:05:08.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2015/01/10/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2017-03-09T05:43:43.000Z</lastmod>
     <data>
         <display>
         <title>Android 导航栏和状态栏操作</title>
-        <pubTime>2016-01-09T17:34:14.000Z</pubTime>
+        <pubTime>2015-01-09T17:34:14.000Z</pubTime>
         
         <tag>状态栏,导航栏</tag>
          
@@ -44,12 +64,12 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2016/04/08/Android%20%E5%8D%8A%E9%80%9A%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F/</loc>
-    <lastmod>2017-02-19T18:05:03.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2015/04/08/Android%20%E5%8D%8A%E9%80%9A%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F/</loc>
+    <lastmod>2017-03-09T05:43:35.000Z</lastmod>
     <data>
         <display>
         <title>Android 半通明状态栏</title>
-        <pubTime>2016-04-07T16:45:00.000Z</pubTime>
+        <pubTime>2015-04-07T16:45:00.000Z</pubTime>
         
         <tag>状态栏</tag>
          
@@ -57,126 +77,6 @@
            
              
               <breadCrumb title="Android 视图" url="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/%E6%80%BB%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/</loc>
-    <lastmod>2017-02-17T10:22:03.000Z</lastmod>
-    <data>
-        <display>
-        <title>总数操作符</title>
-        <pubTime>2016-11-15T07:29:40.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/%E5%A7%94%E6%89%98/</loc>
-    <lastmod>2016-12-20T07:47:46.000Z</lastmod>
-    <data>
-        <display>
-        <title>委托</title>
-        <pubTime>2016-11-15T07:29:27.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/%E9%9B%86%E5%90%88%E5%92%8C%E5%87%BD%E6%95%B0%E6%93%8D%E4%BD%9C%E7%AC%A6/</loc>
-    <lastmod>2016-12-20T07:47:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>集合和函数操作符</title>
-        <pubTime>2016-11-15T07:29:34.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/%E6%93%8D%E4%BD%9C%E7%AC%A6%E8%A1%A8/</loc>
-    <lastmod>2016-12-20T07:46:58.000Z</lastmod>
-    <data>
-        <display>
-        <title>操作符表</title>
-        <pubTime>2016-11-15T07:29:21.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/%E6%89%A9%E5%B1%95%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2016-12-20T07:46:43.000Z</lastmod>
-    <data>
-        <display>
-        <title>扩展函数</title>
-        <pubTime>2016-11-15T07:27:29.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2016/11/15/Kotlin%20%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/</loc>
-    <lastmod>2016-12-20T07:46:26.000Z</lastmod>
-    <data>
-        <display>
-        <title>Kotlin 准备工作</title>
-        <pubTime>2016-11-14T20:56:16.000Z</pubTime>
-        
-        <tag>Kotlin</tag>
-         
-         
-           
-             
-              <breadCrumb title="Kotlin" url="http://jkwarthegarden.com/categories/Kotlin/"/>
           
         </display>
     </data>
