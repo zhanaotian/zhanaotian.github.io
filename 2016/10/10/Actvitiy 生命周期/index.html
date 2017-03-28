@@ -1,0 +1,886 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="hOf0V_BEaBmz7YpqXqdUJkZaK60Gag7cg15btqFTE4g" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="LubFGORrrD" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Activity 生命周期," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="jkwarthegarden" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Activity 生命周期">
+<meta property="og:url" content="http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/index.html">
+<meta property="og:site_name" content="jkwarthegarden">
+<meta property="og:description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png">
+<meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png">
+<meta property="og:updated_time" content="2017-03-28T19:58:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Activity 生命周期">
+<meta name="twitter:description" content="Activity 生命周期
+在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。
+
+
+Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。
+
+Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压">
+<meta name="twitter:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/"/>
+
+
+
+
+
+  <title> Activity 生命周期 | jkwarthegarden </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3fad4355542a45d0e48baf87d46ba88b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">jkwarthegarden</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JKwar">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkwarthegarden">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Activity 生命周期
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-10T01:34:14+08:00">
+                2016-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Activity/" itemprop="url" rel="index">
+                    <span itemprop="name">Activity</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/10/10/Actvitiy 生命周期/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/Actvitiy 生命周期/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
+<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+</blockquote>
+<ul>
+<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
+</li>
+<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
+</li>
+<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
+<a id="more"></a>  
+</li>
+</ul>
+<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
+<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
+<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
+</blockquote>
+<ul>
+<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
+</li>
+<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
+</li>
+</ul>
+<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
+<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
+</blockquote>
+<ul>
+<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
+</li>
+<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画）。</p>
+</li>
+</ul>
+<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
+<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
+</blockquote>
+<ul>
+<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
+</li>
+<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
+</li>
+</ul>
+<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
+<blockquote>
+<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
+<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
+<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
+</blockquote>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Activity-生命周期/" rel="tag"># Activity 生命周期</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/12/Android 导航栏和状态栏操作/" rel="next" title="Android 导航栏和状态栏操作">
+                <i class="fa fa-chevron-left"></i> Android 导航栏和状态栏操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/10/Actvitiy 生命周期/"
+           data-title="Activity 生命周期" data-url="http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="JKwar" />
+          <p class="site-author-name" itemprop="name">JKwar</p>
+           
+              <p class="site-description motion-element" itemprop="description">Actions speak louder than words</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zhanaotian" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/JKwar" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-生命周期"><span class="nav-number">1.</span> <span class="nav-text">Activity 生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actvitiy-生命周期图"><span class="nav-number">2.</span> <span class="nav-text">Actvitiy 生命周期图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动与销毁Activity的过程"><span class="nav-number">2.1.</span> <span class="nav-text">启动与销毁Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停与恢复Activity的过程"><span class="nav-number">2.2.</span> <span class="nav-text">暂停与恢复Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止与重启Activity的过程"><span class="nav-number">2.3.</span> <span class="nav-text">停止与重启Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新创建Activity"><span class="nav-number">2.4.</span> <span class="nav-text">重新创建Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">2.4.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JKwar</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jkwarblogcomment"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

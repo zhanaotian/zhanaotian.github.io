@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jkwarthegarden.com/"/>
-  <updated>2017-03-09T05:43:35.000Z</updated>
+  <updated>2017-03-28T19:58:20.000Z</updated>
   <id>http://jkwarthegarden.com/</id>
   
   <author>
@@ -16,11 +16,163 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Activity 生命周期</title>
+    <link href="http://jkwarthegarden.com/2016/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/</id>
+    <published>2016-10-09T17:34:14.000Z</published>
+    <updated>2017-03-28T19:58:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
+<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+</blockquote>
+<ul>
+<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
+</li>
+<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
+</li>
+<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
+<a id="more"></a>  
+</li>
+</ul>
+<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
+<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
+<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
+</blockquote>
+<ul>
+<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
+</li>
+<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
+</li>
+</ul>
+<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
+<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
+</blockquote>
+<ul>
+<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
+</li>
+<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画）。</p>
+</li>
+</ul>
+<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
+<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
+</blockquote>
+<ul>
+<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
+</li>
+<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
+</li>
+</ul>
+<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
+<blockquote>
+<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
+<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
+<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
+</blockquote>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Activity-生命周期&quot;&gt;&lt;a href=&quot;#Activity-生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity 生命周期&quot;&gt;&lt;/a&gt;Activity 生命周期&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，&lt;br&gt;但是依然保持着所有的状态信息和成员变量。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
+    
+    
+      <category term="Activity 生命周期" scheme="http://jkwarthegarden.com/tags/Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 导航栏和状态栏操作</title>
+    <link href="http://jkwarthegarden.com/2016/04/12/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/"/>
+    <id>http://jkwarthegarden.com/2016/04/12/Android 导航栏和状态栏操作/</id>
+    <published>2016-04-11T17:34:14.000Z</published>
+    <updated>2017-03-28T19:58:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="淡化状态栏和系统栏"><a href="#淡化状态栏和系统栏" class="headerlink" title="淡化状态栏和系统栏"></a>淡化状态栏和系统栏</h3><blockquote>
+<p>在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签</p>
+</blockquote>
+<p>  <code>decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);</code></p>
+<a id="more"></a>  
+<h3 id="显示状态栏与导航栏"><a href="#显示状态栏与导航栏" class="headerlink" title="显示状态栏与导航栏"></a>显示状态栏与导航栏</h3><p>  <code>decorView.setSystemUiVisibility(0);</code></p>
+<h3 id="隐藏状态栏"><a href="#隐藏状态栏" class="headerlink" title="隐藏状态栏"></a>隐藏状态栏</h3><ol>
+<li><p>在4.0及以下版本中隐藏状态栏有2种方法</p>
+<ol>
+<li>在你的manifest文件中设置Activity的主题<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;application</div><div class="line">  android:theme=&quot;@android:style/Theme.Holo.NoActionBar.Fullscreen&quot; &gt;</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>设置主题的优势是:<br>易于维护，且不像动态设置标签那样容易出错。<br>有更流畅的UI转换，因为在初始化你的Activity之前,系统已经得到了需要渲染UI的信息。</p>
+</blockquote>
+<ol>
+<li>使用WindowManager来动态隐藏状态栏<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"> @Override</div><div class="line"> protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">     super.onCreate(savedInstanceState);</div><div class="line">     if (Build.VERSION.SDK_INT &lt; 16) &#123;</div><div class="line">         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</div><div class="line">                 WindowManager.LayoutParams.FLAG_FULLSCREEN);</div><div class="line">     &#125;</div><div class="line">     setContentView(R.layout.activity_main);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>在4.1及以上版本中隐藏状态栏。<br>使用 setSystemUiVisibility() 进行动态隐藏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div><div class="line">ActionBar actionBar = getActionBar();</div><div class="line">actionBar.hide();</div></pre></td></tr></table></figure>
+</li>
+<li><p>让内容显示在状态栏之后。</p>
+<blockquote>
+<p>使用 SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 标签<br>并在xml 中使用android:fitsSystemWindows=”true”,<br>它会调整父ViewGroup使它留出特定区域给系统栏,确保应用中特定区域不会被系统栏掩盖。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="隐藏导航栏"><a href="#隐藏导航栏" class="headerlink" title="隐藏导航栏"></a>隐藏导航栏</h3><ol>
+<li><p>在4.0及以上版本中隐藏导航栏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">             | View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div></pre></td></tr></table></figure>
+</li>
+<li><p>让内容显示在导航栏之后</p>
+<blockquote>
+<p>使用 SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION 标签</p>
+</blockquote>
+<ul>
+<li>要注意的几点:</li>
+<li>一旦UI标签被清除就必须重新设置(比如跳到另外一个Activity)。</li>
+<li>在不同地方监听UI标签是有所不同的,比如在Activity的onCreate()方法中隐藏状态      栏,当用户按下home键系统栏就会重新显示,如果你想让在不同Activity之间切换,系统UI保持不变，你需要在onResume()与onWindowFocusChaned()里设定UI标签。</li>
+<li>setSystemUiVisibility()仅仅在被调用的View显示的时候才会生效。</li>
+<li>当从View导航到别的地方时，用setSystemUiVisibility()设置的标签会被清除。</li>
+</ul>
+</li>
+</ol>
+<h3 id="全屏沉浸式应用"><a href="#全屏沉浸式应用" class="headerlink" title="全屏沉浸式应用"></a>全屏沉浸式应用</h3><p> 使用非粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mDecorView.setSystemUiVisibility(</div><div class="line">           View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">           | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏</div><div class="line">           | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏</div><div class="line">           | View.SYSTEM_UI_FLAG_IMMERSIVE);</div></pre></td></tr></table></figure></p>
+<p> 使用粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">decorView.setSystemUiVisibility(</div><div class="line">               View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);</div></pre></td></tr></table></figure></p>
+<p> 注意沉浸式只能在android 4.4以上的系统使用</p>
+<h3 id="响应UI可见性的变化"><a href="#响应UI可见性的变化" class="headerlink" title="响应UI可见性的变化"></a>响应UI可见性的变化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">decorView.setOnSystemUiVisibilityChangeListener</div><div class="line">   (new View.OnSystemUiVisibilityChangeListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onSystemUiVisibilityChange(int visibility) &#123;</div><div class="line">        //全屏</div><div class="line">        if ((visibility &amp; View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) &#123;</div><div class="line">        </div><div class="line">        &#125; else &#123;</div><div class="line">        </div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;淡化状态栏和系统栏&quot;&gt;&lt;a href=&quot;#淡化状态栏和系统栏&quot; class=&quot;headerlink&quot; title=&quot;淡化状态栏和系统栏&quot;&gt;&lt;/a&gt;淡化状态栏和系统栏&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  &lt;code&gt;decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android 视图" scheme="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+    
+    
+      <category term="状态栏,导航栏" scheme="http://jkwarthegarden.com/tags/%E7%8A%B6%E6%80%81%E6%A0%8F-%E5%AF%BC%E8%88%AA%E6%A0%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android 半通明状态栏</title>
-    <link href="http://jkwarthegarden.com/2015/04/08/Android%20%E5%8D%8A%E9%80%9A%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
-    <id>http://jkwarthegarden.com/2015/04/08/Android 半通明状态栏/</id>
-    <published>2015-04-07T16:45:00.000Z</published>
-    <updated>2017-03-09T05:43:35.000Z</updated>
+    <link href="http://jkwarthegarden.com/2016/04/08/Android%20%E5%8D%8A%E9%80%9A%E6%98%8E%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
+    <id>http://jkwarthegarden.com/2016/04/08/Android 半通明状态栏/</id>
+    <published>2016-04-07T16:45:00.000Z</published>
+    <updated>2017-03-28T19:58:24.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Android 从4.4 版本开始支持半透明状态栏效果。<br>4.4设置方式与5.0不同(5.0推出了Material Design,不用设置默认就有)。<br>在4.4 设置半通明状态栏效果,有2种方法。</p>
@@ -56,10 +208,10 @@
   
   <entry>
     <title>Android Paint 属性详解</title>
-    <link href="http://jkwarthegarden.com/2015/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/"/>
-    <id>http://jkwarthegarden.com/2015/01/19/Android Paint 属性详解/</id>
-    <published>2015-01-18T16:34:14.000Z</published>
-    <updated>2017-03-09T05:43:52.000Z</updated>
+    <link href="http://jkwarthegarden.com/2016/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://jkwarthegarden.com/2016/01/19/Android Paint 属性详解/</id>
+    <published>2016-01-18T16:34:14.000Z</published>
+    <updated>2017-03-28T19:58:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>Paint即画笔,在绘图过程中起到了极其重要的作用,画笔主要保存了颜色，  </p>
 <p>样式等绘制信息,指定了如何绘制文本和图形,画笔对象有很多设置方法，  </p>
@@ -147,154 +299,94 @@
   </entry>
   
   <entry>
-    <title>Activity 生命周期</title>
-    <link href="http://jkwarthegarden.com/2015/01/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://jkwarthegarden.com/2015/01/10/Actvitiy 生命周期/</id>
-    <published>2015-01-09T17:34:14.000Z</published>
-    <updated>2017-03-10T04:21:01.000Z</updated>
+    <title>Android Task 相关</title>
+    <link href="http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/"/>
+    <id>http://jkwarthegarden.com/2015/11/29/Activity Task相关/</id>
+    <published>2015-11-28T19:54:45.000Z</published>
+    <updated>2017-03-28T20:00:03.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
-<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+    <content type="html"><![CDATA[<h3 id="Android-任务栈简介"><a href="#Android-任务栈简介" class="headerlink" title="Android 任务栈简介"></a>Android 任务栈简介</h3><blockquote>
+<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
 </blockquote>
-<ul>
-<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
-</li>
-<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
-</li>
-<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
-<a id="more"></a>  
-</li>
-</ul>
-<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
-<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
-<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
+ <a id="more"></a>  
+<p><img src="http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png" alt=""></p>
+<h3 id="AndroidMainifest启动模式"><a href="#AndroidMainifest启动模式" class="headerlink" title="AndroidMainifest启动模式"></a>AndroidMainifest启动模式</h3><blockquote>
+<p>Android 的启动模式一个有四种，分别是standard、singleTop、singleTask、singleStance，具有不同的功能。</p>
 </blockquote>
-<ul>
-<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
+<ol>
+<li><p>standard<br>默认启动模式，每次激活Activity都会创建新的实例，并放入任务栈中。<br>使用场景：大多数的Activity。</p>
 </li>
-<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
+<li><p>singleTop<br>如果在任务的栈顶正好存在该Activity的实例，就重用该实例(会调用实例的onNewIntent())，否则就会创建新的实例并放入栈顶，即使栈中已经存在该Activity的实例，只要不在栈顶，都会创建新的实例。<br>使用场景：接受消息后显示的界面（新闻类和阅读类App的内容界面），比如</p>
 </li>
-</ul>
-<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
-<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
-</blockquote>
-<ul>
-<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
+<li><p>singleTask<br>如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移出栈。如果栈中不存在该实例，将会创建新的实例放入栈中。<br>使用场景：浏览器的主界面。不管从多少个应用启动浏览器，只会启动主界面一次，其余情况都会走onNewIntent，并且会清空主界面上面的其他页面。</p>
 </li>
-<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画或）。</p>
+<li><p>singleStance<br>在一个新栈中创建该Activity的实例，并让多个应用共享该栈中的该Activity实例。一旦该模式的Activity实例已经存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例( 会调用实例的 onNewIntent() )。其效果相当于多个应用共享一个应用，不管谁激活该 Activity 都会进入同一个应用中。<br>使用场景：如闹铃提醒，将闹铃提醒与闹铃设置分离。singleInstance不要用于中间页面，如果用于中间页面，跳转会有问题，比如：A -&gt; B (singleInstance) -&gt; C，完全退出后，在此启动，首先打开的是B。</p>
 </li>
-</ul>
-<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
-<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
-</blockquote>
-<ul>
-<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
-</li>
-<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
-</li>
-</ul>
-<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
+</ol>
 <blockquote>
-<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
-<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
-<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
+<p>注意：如果在一个singleTask和singleStance的ActivityA中通过startActivityResult()方法启动另外一个ActivityB，那么系统会直接方法Activity.RESULT_CANCELED而不会再去等待方法。这是游戏系统在Framework层做了限制，所以二种不同Task之间，默认是不能传递数据的，如果一定要传递，那就只能通过Intent来绑定数据。</p>
 </blockquote>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
+<h3 id="Intent-Flag-启动模式"><a href="#Intent-Flag-启动模式" class="headerlink" title="Intent Flag 启动模式"></a>Intent Flag 启动模式</h3><ul>
+<li><p>Intent.FLAG_ACTIVITY_NEW_TASK（默认）</p>
+<p>使用一个新的Task来启动一个Activity，但启动的每个Activity都将在一个新的Task，该Flag通常使用在从Service中启动Activity的场景，由于Service中并不存在Activity栈，所以使用该Flag来创建一个新的Activity栈，并创建新的Activity实例。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_SINGLE_TOP</p>
+<p>使用singletop模式来启动一个Activity，与指定android：launchMode=”singleTop“效果相同。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_CLEAR_TOP</p>
+<p>如果设置，并且这个Activity已经在当前的Task中运行，因此，不再是重新启动一个这个Activity的实例，而是在这个Activity上方的所有Activity都将关闭，然后这个Intent会作为一个新的I ntent投递到老的Activity（现在位于顶端）中。<br>例如：假设一个Task中包含这些Activity：A，B，C，D。如果D调用了startActivity()，并且包含一个指向Activity B的Intent，那么，C和D都将结束，然后B接收到这个Intent，因此，目前stack的状况是：A，B。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_NO_HISTORY</p>
+<p>如果设置，这将在Task的Activitystack中设置一个还原点，当Task恢复时，需要清理Activity。也就是说，下一次Task带着 FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记进入前台时（典型的操作是用户在主画面重启它），这个Activity和它之上的都将关闭，以至于用户不能再返回到它们，但是可以回到之前的Activity。<br>例如，一个e-mail应用程序可能有一个操作是查看一个附件，需要启动图片浏览Activity来显示。这个 Activity应该作为e-mail应用程序Task的一部分，因为这是用户在这个Task中触发的操作。然而，当用户离开这个Task，然后从主画面选择e-mail app，我们可能希望回到查看的会话中，但不是查看图片附件，因为这让人困惑。通过在启动图片浏览时设定这个标志，浏览及其它启动的Activity在下次用户返回到mail程序时都将全部清除。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED<br>在重置Task或者启动Activity创建新的Task时生效。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET</p>
+<p>使用这种模式启动Activity，重置该Task时清除该Activity。<br>例如：A以这种模式启动B，B又启动C，当用户离开应用，一段时间后又从Home回到应用，显示A界面，当前Activity栈为A。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_REORDER_TO_FRONT</p>
+<p>如果在Intent中设置，并传递给Context.startActivity()，这个标志将引发已经运行的Activity移动到历史stack的顶端。<br>例如：假设一个Task由四个Activity组成：A,B,C,D。如果D调用startActivity()来启动Activity B，那么，B会移动到历史stack的顶端，现在的次序变成A,C,D,B。如果FLAG_ACTIVITY_CLEAR_TOP标志也设置的话，那么这个标志将被忽略。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</p>
+<p>如果设置，新的Activity不会在最近启动的Activity的列表中保存。</p>
+</li>
+<li><p>Intent.FLAG_ACTIVITY_FORWARD_RESULT</p>
+<p>如果设置，并且这个Intent用于从一个存在的Activity启动一个新的Activity，那么，这个作为答复目标的Activity将会传到这个新的Activity中。这种方式下，新的Activity可以调用setResult(int)，并且这个结果值将发送给那个作为答复目标的 Activity。</p>
+</li>
+</ul>
+<h3 id="清空任务栈"><a href="#清空任务栈" class="headerlink" title="清空任务栈"></a>清空任务栈</h3><p>  系统提供清空任务栈的方法让我让我们将一个Task清除。通常情况下，我们在AndroidMainifest文件中的<activity>标签中使用以下几种属性来清理任务栈。</activity></p>
+<ul>
+<li><p>clearTaskOnLaunch</p>
+<p>每次返回该Activity时，都将该Activity之上的所有Activity清除，通过这个属性，可以让这个Task每次在初始化的时候，都只 有这个Activity。</p>
+<ul>
+<li>finishOnTaskLaunch</li>
+</ul>
+<p>finishOnTaskLaunch属性与clearTaskOnLaunch类似，只不过finishOnTaskLaunch是作业在自己身上，通过这个属性，当离开这个Activity所在的Task，那么用户返回时，该Activity就会被finish掉。</p>
+</li>
+</ul>
+<ul>
+<li><p>alwaysRetainTaskState</p>
+<p>alwayRetainTaskState属性给Task设置免死金牌，如果如果将Activity的这个属性设置为True，那么该Activity所在的Task将不接受任何清理命令，一直保持当前Task状态。</p>
+</li>
+<li><p>allowTaskReparenting</p>
+<p>Activity实例在当前应用退居后台后，是否能从启动它的那个task移动到有共同affinity的task，“true”表示可以移动，“false”表示它必须呆在当前应用的task中，默认值为false。</p>
+</li>
+</ul>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://blog.csdn.net/liuhe688/article/details/6761337" target="_blank" rel="external">http://blog.csdn.net/liuhe688/article/details/6761337</a>)<br>(<a href="https://my.oschina.net/u/2336511/blog/392412" target="_blank" rel="external">https://my.oschina.net/u/2336511/blog/392412</a>)</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;Activity-生命周期&quot;&gt;&lt;a href=&quot;#Activity-生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity 生命周期&quot;&gt;&lt;/a&gt;Activity 生命周期&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。&lt;/p&gt;
+      &lt;h3 id=&quot;Android-任务栈简介&quot;&gt;&lt;a href=&quot;#Android-任务栈简介&quot; class=&quot;headerlink&quot; title=&quot;Android 任务栈简介&quot;&gt;&lt;/a&gt;Android 任务栈简介&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，&lt;br&gt;但是依然保持着所有的状态信息和成员变量。&lt;/p&gt;
     
     </summary>
     
-      <category term="Android 视图" scheme="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
     
     
-      <category term="Activity" scheme="http://jkwarthegarden.com/tags/Activity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android 导航栏和状态栏操作</title>
-    <link href="http://jkwarthegarden.com/2015/01/10/Android%20%E5%AF%BC%E8%88%AA%E6%A0%8F%E5%92%8C%E7%8A%B6%E6%80%81%E6%A0%8F%E6%93%8D%E4%BD%9C/"/>
-    <id>http://jkwarthegarden.com/2015/01/10/Android 导航栏和状态栏操作/</id>
-    <published>2015-01-09T17:34:14.000Z</published>
-    <updated>2017-03-09T05:43:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="淡化状态栏和系统栏"><a href="#淡化状态栏和系统栏" class="headerlink" title="淡化状态栏和系统栏"></a>淡化状态栏和系统栏</h3><blockquote>
-<p>在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签</p>
-</blockquote>
-<p>  <code>decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);</code></p>
-<a id="more"></a>  
-<h3 id="显示状态栏与导航栏"><a href="#显示状态栏与导航栏" class="headerlink" title="显示状态栏与导航栏"></a>显示状态栏与导航栏</h3><p>  <code>decorView.setSystemUiVisibility(0);</code></p>
-<h3 id="隐藏状态栏"><a href="#隐藏状态栏" class="headerlink" title="隐藏状态栏"></a>隐藏状态栏</h3><ol>
-<li><p>在4.0及以下版本中隐藏状态栏有2种方法</p>
-<ol>
-<li>在你的manifest文件中设置Activity的主题<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;application</div><div class="line">  android:theme=&quot;@android:style/Theme.Holo.NoActionBar.Fullscreen&quot; &gt;</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>设置主题的优势是:<br>易于维护，且不像动态设置标签那样容易出错。<br>有更流畅的UI转换，因为在初始化你的Activity之前,系统已经得到了需要渲染UI的信息。</p>
-</blockquote>
-<ol>
-<li>使用WindowManager来动态隐藏状态栏<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"> @Override</div><div class="line"> protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">     super.onCreate(savedInstanceState);</div><div class="line">     if (Build.VERSION.SDK_INT &lt; 16) &#123;</div><div class="line">         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</div><div class="line">                 WindowManager.LayoutParams.FLAG_FULLSCREEN);</div><div class="line">     &#125;</div><div class="line">     setContentView(R.layout.activity_main);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>在4.1及以上版本中隐藏状态栏。<br>使用 setSystemUiVisibility() 进行动态隐藏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div><div class="line">ActionBar actionBar = getActionBar();</div><div class="line">actionBar.hide();</div></pre></td></tr></table></figure>
-</li>
-<li><p>让内容显示在状态栏之后。</p>
-<blockquote>
-<p>使用 SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 标签<br>并在xml 中使用android:fitsSystemWindows=”true”,<br>它会调整父ViewGroup使它留出特定区域给系统栏,确保应用中特定区域不会被系统栏掩盖。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="隐藏导航栏"><a href="#隐藏导航栏" class="headerlink" title="隐藏导航栏"></a>隐藏导航栏</h3><ol>
-<li><p>在4.0及以上版本中隐藏导航栏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">             | View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div></pre></td></tr></table></figure>
-</li>
-<li><p>让内容显示在导航栏之后</p>
-<blockquote>
-<p>使用 SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION 标签</p>
-</blockquote>
-<ul>
-<li>要注意的几点:</li>
-<li>一旦UI标签被清除就必须重新设置(比如跳到另外一个Activity)。</li>
-<li>在不同地方监听UI标签是有所不同的,比如在Activity的onCreate()方法中隐藏状态      栏,当用户按下home键系统栏就会重新显示,如果你想让在不同Activity之间切换,系统UI保持不变，你需要在onResume()与onWindowFocusChaned()里设定UI标签。</li>
-<li>setSystemUiVisibility()仅仅在被调用的View显示的时候才会生效。</li>
-<li>当从View导航到别的地方时，用setSystemUiVisibility()设置的标签会被清除。</li>
-</ul>
-</li>
-</ol>
-<h3 id="全屏沉浸式应用"><a href="#全屏沉浸式应用" class="headerlink" title="全屏沉浸式应用"></a>全屏沉浸式应用</h3><p> 使用非粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mDecorView.setSystemUiVisibility(</div><div class="line">           View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">           | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏</div><div class="line">           | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏</div><div class="line">           | View.SYSTEM_UI_FLAG_IMMERSIVE);</div></pre></td></tr></table></figure></p>
-<p> 使用粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">decorView.setSystemUiVisibility(</div><div class="line">               View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);</div></pre></td></tr></table></figure></p>
-<p> 注意沉浸式只能在android 4.4以上的系统使用</p>
-<h3 id="响应UI可见性的变化"><a href="#响应UI可见性的变化" class="headerlink" title="响应UI可见性的变化"></a>响应UI可见性的变化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">decorView.setOnSystemUiVisibilityChangeListener</div><div class="line">   (new View.OnSystemUiVisibilityChangeListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onSystemUiVisibilityChange(int visibility) &#123;</div><div class="line">        //全屏</div><div class="line">        if ((visibility &amp; View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) &#123;</div><div class="line">        </div><div class="line">        &#125; else &#123;</div><div class="line">        </div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;淡化状态栏和系统栏&quot;&gt;&lt;a href=&quot;#淡化状态栏和系统栏&quot; class=&quot;headerlink&quot; title=&quot;淡化状态栏和系统栏&quot;&gt;&lt;/a&gt;淡化状态栏和系统栏&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;  &lt;code&gt;decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);&lt;/code&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android 视图" scheme="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
-    
-    
-      <category term="状态栏,导航栏" scheme="http://jkwarthegarden.com/tags/%E7%8A%B6%E6%80%81%E6%A0%8F-%E5%AF%BC%E8%88%AA%E6%A0%8F/"/>
+      <category term="Activity Task" scheme="http://jkwarthegarden.com/tags/Activity-Task/"/>
     
   </entry>
   
