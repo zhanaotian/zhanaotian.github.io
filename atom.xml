@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jkwarthegarden.com/"/>
-  <updated>2017-03-28T19:58:20.000Z</updated>
+  <updated>2017-03-28T19:58:26.000Z</updated>
   <id>http://jkwarthegarden.com/</id>
   
   <author>
@@ -14,83 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Activity 生命周期</title>
-    <link href="http://jkwarthegarden.com/2016/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://jkwarthegarden.com/2016/10/10/Actvitiy 生命周期/</id>
-    <published>2016-10-09T17:34:14.000Z</published>
-    <updated>2017-03-28T19:58:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
-<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
-</blockquote>
-<ul>
-<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
-</li>
-<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
-</li>
-<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
-<a id="more"></a>  
-</li>
-</ul>
-<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
-<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
-<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
-</blockquote>
-<ul>
-<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
-</li>
-<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
-</li>
-</ul>
-<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
-<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
-</blockquote>
-<ul>
-<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
-</li>
-<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画）。</p>
-</li>
-</ul>
-<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
-<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
-</blockquote>
-<ul>
-<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
-</li>
-<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
-</li>
-</ul>
-<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
-<blockquote>
-<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
-<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
-<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
-</blockquote>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;Activity-生命周期&quot;&gt;&lt;a href=&quot;#Activity-生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity 生命周期&quot;&gt;&lt;/a&gt;Activity 生命周期&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，&lt;br&gt;但是依然保持着所有的状态信息和成员变量。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
-    
-    
-      <category term="Activity 生命周期" scheme="http://jkwarthegarden.com/tags/Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    
-  </entry>
   
   <entry>
     <title>Android 导航栏和状态栏操作</title>
@@ -299,11 +222,11 @@
   </entry>
   
   <entry>
-    <title>Android Task 相关</title>
+    <title>Activity Task 相关</title>
     <link href="http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/"/>
     <id>http://jkwarthegarden.com/2015/11/29/Activity Task相关/</id>
     <published>2015-11-28T19:54:45.000Z</published>
-    <updated>2017-03-28T20:00:03.000Z</updated>
+    <updated>2017-03-29T02:46:15.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Android-任务栈简介"><a href="#Android-任务栈简介" class="headerlink" title="Android 任务栈简介"></a>Android 任务栈简介</h3><blockquote>
 <p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
@@ -387,6 +310,83 @@
     
     
       <category term="Activity Task" scheme="http://jkwarthegarden.com/tags/Activity-Task/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Activity 生命周期</title>
+    <link href="http://jkwarthegarden.com/2015/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>http://jkwarthegarden.com/2015/10/10/Actvitiy 生命周期/</id>
+    <published>2015-10-09T17:34:14.000Z</published>
+    <updated>2017-03-30T02:43:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
+<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+</blockquote>
+<ul>
+<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
+</li>
+<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
+</li>
+<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
+<a id="more"></a>  
+</li>
+</ul>
+<h3 id="Actvitiy-生命周期图"><a href="#Actvitiy-生命周期图" class="headerlink" title="Actvitiy 生命周期图"></a>Actvitiy 生命周期图</h3><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
+<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
+<p>在系统调用onCreate(),马上调用onStart(),之后再执行onResume()，停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity。</p>
+</blockquote>
+<ul>
+<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
+</li>
+<li><p>onDestory()：进行资源清理，杀死后台线程。</p>
+</li>
+</ul>
+<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
+<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
+</blockquote>
+<ul>
+<li><p>onPause()：释放系统资源（如broadcast receivers, sensors等）、停止动画或者是其他正在运行的操作。</p>
+</li>
+<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画）。</p>
+</li>
+</ul>
+<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
+<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
+</blockquote>
+<ul>
+<li><p>onStop()：释放系统资源、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
+</li>
+<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
+</li>
+</ul>
+<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
+<blockquote>
+<p>当系统开始停止Activity时，只有在Activity实例会需要重新创建的情况下才会调用到onSaveInstanceState() (1) ，在这个方法里面可以指定额外的状态数据到Bunde中。如果这个Activity被destroyed然后这个实例又需要被重新创建时，系统会传递在 (1) 中的状态数据到 onCreate() (2) 与 onRestoreInstanceState()(3).</p>
+<p>通常来说用户点击Back按钮或者是activity通过调用finish()结束自己时，系统就丢失了对Activity实例的引用，不会调用onSaveInstanceState()。如果是因为系统资源紧张或者跳转到其他的activity或者是点击Home而导致Activity的Destory，就会调用onSaveInstanceState() 方法。</p>
+<p>要恢复状态信息调用onRestoreInstanceState()方法。</p>
+</blockquote>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Activity-生命周期&quot;&gt;&lt;a href=&quot;#Activity-生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity 生命周期&quot;&gt;&lt;/a&gt;Activity 生命周期&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，&lt;br&gt;但是依然保持着所有的状态信息和成员变量。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
+    
+    
+      <category term="Activity 生命周期" scheme="http://jkwarthegarden.com/tags/Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
   </entry>
   
