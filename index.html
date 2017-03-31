@@ -659,6 +659,204 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jkwarthegarden.com/2016/03/31/Android TouchEvent事件传递机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JKwar">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkwarthegarden">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/31/Android TouchEvent事件传递机制/" itemprop="url">
+                  Android TouchEvent事件传递机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-31T17:10:39+08:00">
+                2016-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-视图/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 视图</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/03/31/Android TouchEvent事件传递机制/" class="leancloud_visitors" data-flag-title="Android TouchEvent事件传递机制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Tounch相关的方法"><a href="#Tounch相关的方法" class="headerlink" title="Tounch相关的方法"></a>Tounch相关的方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>方法作用</th>
+<th>拥有类            </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> dispatchTouchEvent()</td>
+<td>分派event 调用下面2个方法，一般不重写</td>
+<td>ViewGroup子类，非ViewGroup子类</td>
+</tr>
+<tr>
+<td> onInterceptTouchEvent()</td>
+<td>拦截event true 拦截   false 不拦截</td>
+<td>ViewGroup子类                 </td>
+</tr>
+<tr>
+<td> onTouchEvent()</td>
+<td>处理event true 处理了 false 交给上级处理</td>
+<td>ViewGroup子类，非ViewGroup子类</td>
+</tr>
+<tr>
+<td> Acition_Down()</td>
+<td>手指接触</td>
+<td></td>
+</tr>
+<tr>
+<td> Action_MOVE()</td>
+<td>手指滑动</td>
+<td></td>
+</tr>
+<tr>
+<td> Aciton_UP()</td>
+<td>手指离开</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/31/Android TouchEvent事件传递机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jkwarthegarden.com/2016/01/19/Android Paint 属性详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1181,7 +1379,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1203,7 +1401,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

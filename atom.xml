@@ -130,6 +130,132 @@
   </entry>
   
   <entry>
+    <title>Android TouchEvent事件传递机制</title>
+    <link href="http://jkwarthegarden.com/2016/03/31/Android%20TouchEvent%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/"/>
+    <id>http://jkwarthegarden.com/2016/03/31/Android TouchEvent事件传递机制/</id>
+    <published>2016-03-31T09:10:39.000Z</published>
+    <updated>2017-03-31T09:11:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Tounch相关的方法"><a href="#Tounch相关的方法" class="headerlink" title="Tounch相关的方法"></a>Tounch相关的方法</h3><table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>方法作用</th>
+<th>拥有类            </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> dispatchTouchEvent()</td>
+<td>分派event 调用下面2个方法，一般不重写</td>
+<td>ViewGroup子类，非ViewGroup子类</td>
+</tr>
+<tr>
+<td> onInterceptTouchEvent()</td>
+<td>拦截event true 拦截   false 不拦截</td>
+<td>ViewGroup子类                 </td>
+</tr>
+<tr>
+<td> onTouchEvent()</td>
+<td>处理event true 处理了 false 交给上级处理</td>
+<td>ViewGroup子类，非ViewGroup子类</td>
+</tr>
+<tr>
+<td> Acition_Down()</td>
+<td>手指接触</td>
+<td></td>
+</tr>
+<tr>
+<td> Action_MOVE()</td>
+<td>手指滑动</td>
+<td></td>
+</tr>
+<tr>
+<td> Aciton_UP()</td>
+<td>手指离开</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+ <a id="more"></a>  
+<h3 id="事件拦截是什么？"><a href="#事件拦截是什么？" class="headerlink" title="事件拦截是什么？"></a>事件拦截是什么？</h3><p>要了解触摸事件的拦截机制，首先要知道什么是触摸事件？触摸事件顾名思义就是捕获接触屏幕后产生的事件，当操作应用时，会产生多个事件，按下按钮、这是Acition_Down事件，滑动、是Action_MOVE事件，手抬起、是Aciton_UP事件。这些事件你重新onTounchEvent（MotionEventeven）方法，可以从MotionEvent中找到参数。如此，看来触摸事件还是比较简单的，但是Android的View结构是树形结构，ViewGroup可以包含View，另一个ViewGroup，甚至可能继续嵌套，一层层的叠起来，我们的触摸事件就只有一个，分给谁？父ViewGroup和子View，子ViewGroup到底哪个处理，于是就产生了事件拦截。</p>
+<h3 id="事件拦截原理"><a href="#事件拦截原理" class="headerlink" title="事件拦截原理"></a>事件拦截原理</h3><p>举一个通俗的例子，假设：你所在的公司有一个总裁，级别最高，下面是部门经理，级别次之，最底层，就是干活的我。</p>
+<ol>
+<li>现在董事会交给一个任务给总裁。</li>
+<li>总裁把这个任务安排给部长。</li>
+<li>部长又把这个任务布置给我。</li>
+<li>加班加点完成任务，交给部长。</li>
+<li>部长感觉任务完成的不错，签名交给总裁。</li>
+<li>总裁看了也感觉不错，汇报给董事会。<br>这就是一个完整的事件传递流程。</li>
+</ol>
+<p>总裁-MyViewGroupA，最外层的ViewGroup<br>部长-MyViewGroupB，中间层的ViewGroup<br>干活的我-MyView，  最底层的View</p>
+<p>我们用一个实例来说明：<br>在ViewGroup中我们重写dispatchTouchEvent(),onInterceptTouchEvent(),onTouchEvent()方法，在View我们重写dispatchTouchEvent()，onTouchEvent() 方法。<br>这里可以看出ViewGroup的级别比较高，有onInterceptTouchEvent()这个事件拦截方法。</p>
+<ol>
+<li><p>首先我们点击View，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.30.21.png" alt=""><br>可以看出事件的传递顺序是：<br>总裁（MyViewGroupA）-&gt; 部长（MyViewGroupB）-&gt; 我（MyView）事件传递先执行dispatchTouchEvent()方法，在执行onInterceptTouchEvent()方法。<br>事件处理的顺序是：<br>我（MyView）-&gt; 部长（MyViewGroupA）-&gt; 总裁（MyViewGroupA）事件处理都执行的是onTouchEvent()方法。</p>
+</li>
+<li><p>总裁觉得这个任务太简单自己就能搞定，在onInterceptTouchEvent()中返回true将事件拦截掉，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.31.43.png" alt=""><br>和我们设想的一样，总裁一个人把事情干完了，下面的人就没事干了。</p>
+</li>
+<li><p>部长觉得总裁安排的任务太简单，没必麻烦我，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.37.28.png" alt=""><br>这次我（MyView）就不用干活了。</p>
+</li>
+<li><p>你每天处理完任务想上司报告，那天你受不了压迫，不想干了，自己罢工，在onTouchEvent()返回True，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.58.28.png" alt=""><br>事件传递还是跟以前一样，但是事件处理却在我（MyView）这里断掉了。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Tounch相关的方法&quot;&gt;&lt;a href=&quot;#Tounch相关的方法&quot; class=&quot;headerlink&quot; title=&quot;Tounch相关的方法&quot;&gt;&lt;/a&gt;Tounch相关的方法&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法名&lt;/th&gt;
+&lt;th&gt;方法作用&lt;/th&gt;
+&lt;th&gt;拥有类            &lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt; dispatchTouchEvent()&lt;/td&gt;
+&lt;td&gt;分派event 调用下面2个方法，一般不重写&lt;/td&gt;
+&lt;td&gt;ViewGroup子类，非ViewGroup子类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; onInterceptTouchEvent()&lt;/td&gt;
+&lt;td&gt;拦截event true 拦截   false 不拦截&lt;/td&gt;
+&lt;td&gt;ViewGroup子类                 &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; onTouchEvent()&lt;/td&gt;
+&lt;td&gt;处理event true 处理了 false 交给上级处理&lt;/td&gt;
+&lt;td&gt;ViewGroup子类，非ViewGroup子类&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Acition_Down()&lt;/td&gt;
+&lt;td&gt;手指接触&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Action_MOVE()&lt;/td&gt;
+&lt;td&gt;手指滑动&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt; Aciton_UP()&lt;/td&gt;
+&lt;td&gt;手指离开&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+    
+    </summary>
+    
+      <category term="Android 视图" scheme="http://jkwarthegarden.com/categories/Android-%E8%A7%86%E5%9B%BE/"/>
+    
+    
+      <category term="触摸事件" scheme="http://jkwarthegarden.com/tags/%E8%A7%A6%E6%91%B8%E4%BA%8B%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android Paint 属性详解</title>
     <link href="http://jkwarthegarden.com/2016/01/19/Android%20Paint%20%E5%B1%9E%E6%80%A7%E8%AF%A6%E8%A7%A3/"/>
     <id>http://jkwarthegarden.com/2016/01/19/Android Paint 属性详解/</id>
