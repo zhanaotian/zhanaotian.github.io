@@ -134,7 +134,7 @@
     <link href="http://jkwarthegarden.com/2016/03/31/Android%20TouchEvent%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6/"/>
     <id>http://jkwarthegarden.com/2016/03/31/Android TouchEvent事件传递机制/</id>
     <published>2016-03-31T09:10:39.000Z</published>
-    <updated>2017-03-31T09:11:50.000Z</updated>
+    <updated>2017-04-01T14:33:53.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Tounch相关的方法"><a href="#Tounch相关的方法" class="headerlink" title="Tounch相关的方法"></a>Tounch相关的方法</h3><table>
 <thead>
@@ -160,21 +160,6 @@
 <td>处理event true 处理了 false 交给上级处理</td>
 <td>ViewGroup子类，非ViewGroup子类</td>
 </tr>
-<tr>
-<td> Acition_Down()</td>
-<td>手指接触</td>
-<td></td>
-</tr>
-<tr>
-<td> Action_MOVE()</td>
-<td>手指滑动</td>
-<td></td>
-</tr>
-<tr>
-<td> Aciton_UP()</td>
-<td>手指离开</td>
-<td></td>
-</tr>
 </tbody>
 </table>
  <a id="more"></a>  
@@ -198,6 +183,7 @@
 <li><p>部长觉得总裁安排的任务太简单，没必麻烦我，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.37.28.png" alt=""><br>这次我（MyView）就不用干活了。</p>
 </li>
 <li><p>你每天处理完任务想上司报告，那天你受不了压迫，不想干了，自己罢工，在onTouchEvent()返回True，log打印如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%2016.58.28.png" alt=""><br>事件传递还是跟以前一样，但是事件处理却在我（MyView）这里断掉了。</p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://blog.csdn.net/morgan_xww/article/details/9372285" target="_blank" rel="external">http://blog.csdn.net/morgan_xww/article/details/9372285</a>)<br>(<a href="http://www.cnblogs.com/linjzong/p/4191891.html" target="_blank" rel="external">http://www.cnblogs.com/linjzong/p/4191891.html</a>)</p>
 </li>
 </ol>
 ]]></content>
@@ -227,21 +213,6 @@
 &lt;td&gt; onTouchEvent()&lt;/td&gt;
 &lt;td&gt;处理event true 处理了 false 交给上级处理&lt;/td&gt;
 &lt;td&gt;ViewGroup子类，非ViewGroup子类&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt; Acition_Down()&lt;/td&gt;
-&lt;td&gt;手指接触&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt; Action_MOVE()&lt;/td&gt;
-&lt;td&gt;手指滑动&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt; Aciton_UP()&lt;/td&gt;
-&lt;td&gt;手指离开&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
