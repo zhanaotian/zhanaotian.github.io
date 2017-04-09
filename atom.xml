@@ -358,22 +358,22 @@
     <link href="http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/"/>
     <id>http://jkwarthegarden.com/2015/11/29/Activity Task相关/</id>
     <published>2015-11-28T19:54:45.000Z</published>
-    <updated>2017-03-29T02:46:15.000Z</updated>
+    <updated>2017-04-09T07:34:53.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Android-任务栈简介"><a href="#Android-任务栈简介" class="headerlink" title="Android 任务栈简介"></a>Android 任务栈简介</h3><blockquote>
-<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
+<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出（Last In First Out）的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
 </blockquote>
- <a id="more"></a>  
 <p><img src="http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png" alt=""></p>
+ <a id="more"></a>  
 <h3 id="AndroidMainifest启动模式"><a href="#AndroidMainifest启动模式" class="headerlink" title="AndroidMainifest启动模式"></a>AndroidMainifest启动模式</h3><blockquote>
 <p>Android 的启动模式一个有四种，分别是standard、singleTop、singleTask、singleStance，具有不同的功能。</p>
 </blockquote>
 <ol>
 <li><p>standard<br>默认启动模式，每次激活Activity都会创建新的实例，并放入任务栈中。<br>使用场景：大多数的Activity。</p>
 </li>
-<li><p>singleTop<br>如果在任务的栈顶正好存在该Activity的实例，就重用该实例(会调用实例的onNewIntent())，否则就会创建新的实例并放入栈顶，即使栈中已经存在该Activity的实例，只要不在栈顶，都会创建新的实例。<br>使用场景：接受消息后显示的界面（新闻类和阅读类App的内容界面），比如</p>
+<li><p>singleTop<br>如果在任务的栈顶正好存在该Activity的实例，就重用该实例(会调用实例的onNewIntent())，否则就会创建新的实例并放入栈顶，即使栈中已经存在该Activity的实例，只要不在栈顶，都会创建新的实例。<br>使用场景：接受消息后显示的界面（新闻类和阅读类App的内容界面）。</p>
 </li>
-<li><p>singleTask<br>如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移出栈。如果栈中不存在该实例，将会创建新的实例放入栈中。<br>使用场景：浏览器的主界面。不管从多少个应用启动浏览器，只会启动主界面一次，其余情况都会走onNewIntent，并且会清空主界面上面的其他页面。</p>
+<li><p>singleTask<br>如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移出栈。如果栈中不存在该实例，将会创建新的实例放入栈中。<br>使用场景：浏览器的主界面或者退出整个应用。浏览器的主界面：不管从多少个应用启动浏览器，只会启动主界面一次，其余情况都会走onNewIntent，并且会清空主界面上面的其他页面。退出整个应<br>用：将主Activity设为SingleTask模式，然后在要退出的Activity中转到主Activity，从而将主Activity之上的Activity都清除，然后重写主Activity的onNewIntent方法，在方法中加上一句finish(),<br>将最后一个Activity结束掉。</p>
 </li>
 <li><p>singleStance<br>在一个新栈中创建该Activity的实例，并让多个应用共享该栈中的该Activity实例。一旦该模式的Activity实例已经存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例( 会调用实例的 onNewIntent() )。其效果相当于多个应用共享一个应用，不管谁激活该 Activity 都会进入同一个应用中。<br>使用场景：如闹铃提醒，将闹铃提醒与闹铃设置分离。singleInstance不要用于中间页面，如果用于中间页面，跳转会有问题，比如：A -&gt; B (singleInstance) -&gt; C，完全退出后，在此启动，首先打开的是B。</p>
 </li>
@@ -433,8 +433,9 @@
     <summary type="html">
     
       &lt;h3 id=&quot;Android-任务栈简介&quot;&gt;&lt;a href=&quot;#Android-任务栈简介&quot; class=&quot;headerlink&quot; title=&quot;Android 任务栈简介&quot;&gt;&lt;/a&gt;Android 任务栈简介&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。&lt;/p&gt;
+&lt;p&gt;在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出（Last In First Out）的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
     
     </summary>
     

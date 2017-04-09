@@ -1270,8 +1270,9 @@
       
         
           <h3 id="Android-任务栈简介"><a href="#Android-任务栈简介" class="headerlink" title="Android 任务栈简介"></a>Android 任务栈简介</h3><blockquote>
-<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
+<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出（Last In First Out）的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
 </blockquote>
+<p><img src="http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png" alt=""></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/11/29/Activity Task相关/#more" rel="contents">
