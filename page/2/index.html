@@ -447,15 +447,20 @@
 
       
         
-          <h3 id="Activity-生命周期"><a href="#Activity-生命周期" class="headerlink" title="Activity 生命周期"></a>Activity 生命周期</h3><blockquote>
-<p>在Android 生命周期中有很多种状态，我们可以在多种状态中切换，来控制自己的生命周期。但是在这些状态中只有三种是稳定的，而其他的状态都是过渡的不会存在很久。</p>
+          <h3 id="Activity-生命周期是什么？"><a href="#Activity-生命周期是什么？" class="headerlink" title="Activity 生命周期是什么？"></a>Activity 生命周期是什么？</h3><blockquote>
+<p>Activity生命周期是为了更好的管理Activty的一套规则，它可以在多种形态之间进行切换，以此来适应不同的要求。</p>
 </blockquote>
-<ul>
-<li><p>Resumed/Running:该状态下，Activity处于Activity栈顶部，用户可以与它进行交互。</p>
+<h3 id="Activity-形态"><a href="#Activity-形态" class="headerlink" title="Activity 形态"></a>Activity 形态</h3><ul>
+<li><p>Activity/Running<br>该状态下，Activity处于Activity栈的最顶层，可见，并可以与用户进行交互。</p>
 </li>
-<li><p>Paused：该状态下，Activity被另外一个非全屏或者半通明的Activity遮盖，并压入Activity堆栈，   就进入了Paused状态，不能与用户交互，但是所有的状态信息，成员变量都保留，只有在系统内存     极低的情况下才会被回收。</p>
+<li><p>Paused<br>该状态下，Activity失去焦点，被另外一个非全屏或者通明的Activity所遮盖，Activity就会进入Paused形态，但是它只是失去与用户交互的能力，所有的状态信息，成员变量都还保持着，只有在系统内存极低的情况下，才会被系统回收掉。</p>
 </li>
-<li><p>Stopped：该状态下，Activity被另外一个Activity完全覆盖，就进入Stopped状态，这时它不可见，<br>但是依然保持着所有的状态信息和成员变量。</p>
+<li><p>Stopped<br>该状态下，Activity被另外一个Activity完全覆盖，Activity就会进入Stopped形态，此时它不再可见，但是所有的状态信息，成员变量都还保存着。</p>
+</li>
+<li><p>Killed<br>当Activity被系统回收掉或者Activity从来没有创建过，那么Activity就会处于Killed状态。</p>
+</li>
+</ul>
+<p>由此可见，用户的不同动作，会让Activity在这四种形态将切换，而开发者，虽然可以控制Activity如何生，却无法控制Activity如何死。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/10/10/Actvitiy 生命周期/#more" rel="contents">
