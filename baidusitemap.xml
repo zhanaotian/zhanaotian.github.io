@@ -4,14 +4,34 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/</loc>
-    <lastmod>2017-04-09T07:34:53.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2015/12/12/Android%20Service%20%E8%AF%A6%E8%A7%A3/</loc>
+    <lastmod>2017-04-18T15:24:23.000Z</lastmod>
     <data>
         <display>
-        <title>Activity Task 相关</title>
-        <pubTime>2015-11-28T19:54:45.000Z</pubTime>
+        <title>Service 详解</title>
+        <pubTime>2015-12-11T17:34:14.000Z</pubTime>
         
-        <tag>Activity Task</tag>
+        <tag>Service 详解</tag>
+         
+         
+           
+             
+              <breadCrumb title="Service" url="http://jkwarthegarden.com/categories/Service/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2015/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
+    <lastmod>2017-04-09T08:05:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Activity 生命周期</title>
+        <pubTime>2015-10-09T17:34:14.000Z</pubTime>
+        
+        <tag>Activity 生命周期</tag>
          
          
            
@@ -24,14 +44,14 @@
 
     
   <url>
-    <loc>http://jkwarthegarden.com/2015/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</loc>
-    <lastmod>2017-04-09T07:13:50.000Z</lastmod>
+    <loc>http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/</loc>
+    <lastmod>2017-04-09T07:34:53.000Z</lastmod>
     <data>
         <display>
-        <title>Activity 生命周期</title>
-        <pubTime>2015-10-09T17:34:14.000Z</pubTime>
+        <title>Activity Task 相关</title>
+        <pubTime>2015-11-28T19:54:45.000Z</pubTime>
         
-        <tag>Activity 生命周期</tag>
+        <tag>Activity Task</tag>
          
          
            

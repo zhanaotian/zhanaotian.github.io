@@ -93,7 +93,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="状态栏,导航栏," />
+  <meta name="keywords" content="Service 详解," />
 
 
 
@@ -111,25 +111,29 @@
 
 
 
-<meta name="description" content="淡化状态栏和系统栏
-在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签
+<meta name="description" content="Service 简介Service作为Android四大组件之一，在每一个应用程序中都扮演着非常重要的角色。它主要用于在后台处理一些耗时的逻辑，或者去执行某些需要长期运行的任务。必要的时候我们甚至可以在程序退出的情况下，让Service在后台继续保持运行状态。
+Service 生命周期图
 
-  decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);">
+onStartCommand()当使用StartService()启动服务时,系统会调用此方法,一旦执行此方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android 导航栏和状态栏操作">
-<meta property="og:url" content="http://jkwarthegarden.com/2016/04/12/Android 导航栏和状态栏操作/index.html">
+<meta property="og:title" content="Service 详解">
+<meta property="og:url" content="http://jkwarthegarden.com/2015/12/12/Android Service 详解/index.html">
 <meta property="og:site_name" content="jkwarthegarden">
-<meta property="og:description" content="淡化状态栏和系统栏
-在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签
+<meta property="og:description" content="Service 简介Service作为Android四大组件之一，在每一个应用程序中都扮演着非常重要的角色。它主要用于在后台处理一些耗时的逻辑，或者去执行某些需要长期运行的任务。必要的时候我们甚至可以在程序退出的情况下，让Service在后台继续保持运行状态。
+Service 生命周期图
 
-  decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);">
-<meta property="og:updated_time" content="2017-03-28T19:58:26.000Z">
+onStartCommand()当使用StartService()启动服务时,系统会调用此方法,一旦执行此方">
+<meta property="og:image" content="http://oglc61v4u.bkt.clouddn.com/service_lifecycle.png">
+<meta property="og:image" content="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%2014.36.39.png">
+<meta property="og:image" content="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%2022.24.59.png">
+<meta property="og:updated_time" content="2017-04-18T15:24:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android 导航栏和状态栏操作">
-<meta name="twitter:description" content="淡化状态栏和系统栏
-在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签
+<meta name="twitter:title" content="Service 详解">
+<meta name="twitter:description" content="Service 简介Service作为Android四大组件之一，在每一个应用程序中都扮演着非常重要的角色。它主要用于在后台处理一些耗时的逻辑，或者去执行某些需要长期运行的任务。必要的时候我们甚至可以在程序退出的情况下，让Service在后台继续保持运行状态。
+Service 生命周期图
 
-  decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);">
+onStartCommand()当使用StartService()启动服务时,系统会调用此方法,一旦执行此方">
+<meta name="twitter:image" content="http://oglc61v4u.bkt.clouddn.com/service_lifecycle.png">
 
 
 
@@ -157,13 +161,13 @@
 
 
 
-  <link rel="canonical" href="http://jkwarthegarden.com/2016/04/12/Android 导航栏和状态栏操作/"/>
+  <link rel="canonical" href="http://jkwarthegarden.com/2015/12/12/Android Service 详解/"/>
 
 
 
 
 
-  <title> Android 导航栏和状态栏操作 | jkwarthegarden </title>
+  <title> Service 详解 | jkwarthegarden </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -346,7 +350,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jkwarthegarden.com/2016/04/12/Android 导航栏和状态栏操作/">
+    <link itemprop="mainEntityOfPage" href="http://jkwarthegarden.com/2015/12/12/Android Service 详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JKwar">
@@ -367,7 +371,7 @@
             
             
               
-                Android 导航栏和状态栏操作
+                Service 详解
               
             
           </h1>
@@ -382,8 +386,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-12T01:34:14+08:00">
-                2016-04-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-12T01:34:14+08:00">
+                2015-12-12
               </time>
             
 
@@ -405,8 +409,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android-视图/" itemprop="url" rel="index">
-                    <span itemprop="name">Android 视图</span>
+                  <a href="/categories/Service/" itemprop="url" rel="index">
+                    <span itemprop="name">Service</span>
                   </a>
                 </span>
 
@@ -423,7 +427,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/2016/04/12/Android 导航栏和状态栏操作/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/2015/12/12/Android Service 详解/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -432,7 +436,7 @@
 
           
           
-             <span id="/2016/04/12/Android 导航栏和状态栏操作/" class="leancloud_visitors" data-flag-title="Android 导航栏和状态栏操作">
+             <span id="/2015/12/12/Android Service 详解/" class="leancloud_visitors" data-flag-title="Service 详解">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -461,56 +465,47 @@
       
 
       
-        <h3 id="淡化状态栏和系统栏"><a href="#淡化状态栏和系统栏" class="headerlink" title="淡化状态栏和系统栏"></a>淡化状态栏和系统栏</h3><blockquote>
-<p>在版本为4.0以上的Android系统上,可以使用 SYSTEM_UI_FLAG_LOW_PROFILE 这个标签</p>
-</blockquote>
-<p>  <code>decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);</code></p>
-<a id="more"></a>  
-<h3 id="显示状态栏与导航栏"><a href="#显示状态栏与导航栏" class="headerlink" title="显示状态栏与导航栏"></a>显示状态栏与导航栏</h3><p>  <code>decorView.setSystemUiVisibility(0);</code></p>
-<h3 id="隐藏状态栏"><a href="#隐藏状态栏" class="headerlink" title="隐藏状态栏"></a>隐藏状态栏</h3><ol>
-<li><p>在4.0及以下版本中隐藏状态栏有2种方法</p>
-<ol>
-<li>在你的manifest文件中设置Activity的主题<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;application</div><div class="line">  android:theme=&quot;@android:style/Theme.Holo.NoActionBar.Fullscreen&quot; &gt;</div><div class="line">&lt;/application&gt;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<blockquote>
-<p>设置主题的优势是:<br>易于维护，且不像动态设置标签那样容易出错。<br>有更流畅的UI转换，因为在初始化你的Activity之前,系统已经得到了需要渲染UI的信息。</p>
-</blockquote>
-<ol>
-<li>使用WindowManager来动态隐藏状态栏<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class MainActivity extends Activity &#123;</div><div class="line"> @Override</div><div class="line"> protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">     super.onCreate(savedInstanceState);</div><div class="line">     if (Build.VERSION.SDK_INT &lt; 16) &#123;</div><div class="line">         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</div><div class="line">                 WindowManager.LayoutParams.FLAG_FULLSCREEN);</div><div class="line">     &#125;</div><div class="line">     setContentView(R.layout.activity_main);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>在4.1及以上版本中隐藏状态栏。<br>使用 setSystemUiVisibility() 进行动态隐藏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div><div class="line">ActionBar actionBar = getActionBar();</div><div class="line">actionBar.hide();</div></pre></td></tr></table></figure>
-</li>
-<li><p>让内容显示在状态栏之后。</p>
-<blockquote>
-<p>使用 SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN 标签<br>并在xml 中使用android:fitsSystemWindows=”true”,<br>它会调整父ViewGroup使它留出特定区域给系统栏,确保应用中特定区域不会被系统栏掩盖。</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="隐藏导航栏"><a href="#隐藏导航栏" class="headerlink" title="隐藏导航栏"></a>隐藏导航栏</h3><ol>
-<li><p>在4.0及以上版本中隐藏导航栏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">View decorView = getWindow().getDecorView();</div><div class="line">int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">             | View.SYSTEM_UI_FLAG_FULLSCREEN;</div><div class="line">decorView.setSystemUiVisibility(uiOptions);</div></pre></td></tr></table></figure>
-</li>
-<li><p>让内容显示在导航栏之后</p>
-<blockquote>
-<p>使用 SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION 标签</p>
-</blockquote>
+        <h3 id="Service-简介"><a href="#Service-简介" class="headerlink" title="Service 简介"></a>Service 简介</h3><p>Service作为Android四大组件之一，在每一个应用程序中都扮演着非常重要的角色。它主要用于在后台处理一些耗时的逻辑，或者去执行某些需要长期运行的任务。必要的时候我们甚至可以在程序退出的情况下，让Service在后台继续保持运行状态。</p>
+<h3 id="Service-生命周期图"><a href="#Service-生命周期图" class="headerlink" title="Service 生命周期图"></a>Service 生命周期图</h3><p><img src="http://oglc61v4u.bkt.clouddn.com/service_lifecycle.png" alt=""></p>
 <ul>
-<li>要注意的几点:</li>
-<li>一旦UI标签被清除就必须重新设置(比如跳到另外一个Activity)。</li>
-<li>在不同地方监听UI标签是有所不同的,比如在Activity的onCreate()方法中隐藏状态      栏,当用户按下home键系统栏就会重新显示,如果你想让在不同Activity之间切换,系统UI保持不变，你需要在onResume()与onWindowFocusChaned()里设定UI标签。</li>
-<li>setSystemUiVisibility()仅仅在被调用的View显示的时候才会生效。</li>
-<li>当从View导航到别的地方时，用setSystemUiVisibility()设置的标签会被清除。</li>
+<li><p>onStartCommand()<br>当使用StartService()启动服务时,系统会调用此方法,一旦执行此方法,服务将会启动,并在后台无限运行,如果您实现此方法，则在服务工作完成后，需要由您通过调用 stopSelf() 或 stopService() 来停止服务.</p>
+</li>
+<li><p>onBind()<br>当使用BindService()启动服务时，系统会调用此方法，在此方法中，您必须通过返回 IBinder 提供一个接口，供客户端用来与服<br>务进行通信，如果你不希望绑定，则应该返回null。</p>
+</li>
+<li><p>onCreate()<br>首次创建服务时，系统会调用此方法来执行初始化操作（在调用 onStartCommand() 或 onBind() 之前)，如果服务已经运行,则不<br>会调用此方法。</p>
+</li>
+<li><p>onDestroy()<br>当服务不再使用且被销毁时，系统调用此方法，服务应该实现此方法来清理所有资源，如线程、注册的侦听器、接收器等。</p>
+</li>
 </ul>
+<a id="more"></a>  
+<ol>
+<li><p>左图：是使用startService启动的服务生命周期，它启动的服务绘制后台运行，与Activity没有关联。</p>
+</li>
+<li><p>右图：是使用bindService启动的服务生命周期，它启动的服务会和Activity绑定，Activity销毁Service也会随之销毁。</p>
 </li>
 </ol>
-<h3 id="全屏沉浸式应用"><a href="#全屏沉浸式应用" class="headerlink" title="全屏沉浸式应用"></a>全屏沉浸式应用</h3><p> 使用非粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mDecorView.setSystemUiVisibility(</div><div class="line">           View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">           | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏</div><div class="line">           | View.SYSTEM_UI_FLAG_FULLSCREEN // 隐藏状态栏</div><div class="line">           | View.SYSTEM_UI_FLAG_IMMERSIVE);</div></pre></td></tr></table></figure></p>
-<p> 使用粘性沉浸模式<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">decorView.setSystemUiVisibility(</div><div class="line">               View.SYSTEM_UI_FLAG_LAYOUT_STABLE</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION</div><div class="line">               | View.SYSTEM_UI_FLAG_FULLSCREEN</div><div class="line">               | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);</div></pre></td></tr></table></figure></p>
-<p> 注意沉浸式只能在android 4.4以上的系统使用</p>
-<h3 id="响应UI可见性的变化"><a href="#响应UI可见性的变化" class="headerlink" title="响应UI可见性的变化"></a>响应UI可见性的变化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">decorView.setOnSystemUiVisibilityChangeListener</div><div class="line">   (new View.OnSystemUiVisibilityChangeListener() &#123;</div><div class="line">    @Override</div><div class="line">    public void onSystemUiVisibilityChange(int visibility) &#123;</div><div class="line">        //全屏</div><div class="line">        if ((visibility &amp; View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) &#123;</div><div class="line">        </div><div class="line">        &#125; else &#123;</div><div class="line">        </div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="前台-Service"><a href="#前台-Service" class="headerlink" title="前台 Service"></a>前台 Service</h3><p>前台服务与后台服务相比：它有一个一直在运行的图标在系统的状态栏显示，下拉菜单栏后可以看到更清楚的信息，非常类似通知效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">//前台服务</div><div class="line">Intent intent = new Intent(this, MainActivity.class);</div><div class="line">PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);</div><div class="line">Notification notification = new Notification.Builder(this)</div><div class="line">                .setContentTitle(&quot;前台服务标题&quot;)</div><div class="line">                .setContentText(&quot;前台服务内容&quot;)</div><div class="line">                .setWhen(System.currentTimeMillis()) //系统时间</div><div class="line">                .setSmallIcon(R.drawable.ic_stat_name)</div><div class="line">                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))</div><div class="line">                .setContentIntent(pi)</div><div class="line">                .build();</div><div class="line">//绑定服务</div><div class="line">startForeground(1, notification);</div><div class="line">//关闭前台服务</div><div class="line">stopForeground(false);</div></pre></td></tr></table></figure></p>
+<h3 id="远程Service（AIDL）"><a href="#远程Service（AIDL）" class="headerlink" title="远程Service（AIDL）"></a>远程Service（AIDL）</h3><ol>
+<li><p>创建AIDL接口<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%2014.36.39.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">interface IRemoteService &#123;</div><div class="line">       //求和</div><div class="line">       int add(int a, int b);</div><div class="line">       //转化</div><div class="line">       String toUpperCase(String str);</div><div class="line">       //保存</div><div class="line">       Person save(in Person person);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里我传递对象所以必须定义与Person同名的AIDL文件，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">package com.jkwar.serviceExample;</div><div class="line">parcelable Person;</div></pre></td></tr></table></figure>
+</li>
+<li><p>实现接口<br>实现 Service 并重写 onBind() 以返回 Stub 类的实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">private final IRemoteService.Stub mBinder = new IRemoteService.Stub() &#123;</div><div class="line">    @Override</div><div class="line">    public int add(int a, int b) throws RemoteException &#123;</div><div class="line">        Log.d(TAG, &quot;add: executed&quot;);</div><div class="line">        return a + b;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public String toUpperCase(String str) throws RemoteException &#123;</div><div class="line">        Log.d(TAG, &quot;toUpperCase: executed&quot;);</div><div class="line">        return str.toUpperCase();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public Person save(Person person) throws RemoteException &#123;</div><div class="line">        Log.d(TAG, &quot;save: executed&quot;);</div><div class="line">        if (person == null) &#123;</div><div class="line">            return new Person(2, &quot;hello word&quot;);</div><div class="line">        &#125;</div><div class="line">        Log.d(TAG, &quot;Name: &quot; + person.getName());</div><div class="line">        Log.d(TAG, &quot;Id: &quot; + person.getId());</div><div class="line">        return person;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>并在AndroidManifest.xml文件中绑定action</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;service</div><div class="line">       android:name=&quot;.RemoteService&quot;</div><div class="line">       android:enabled=&quot;true&quot;</div><div class="line">       android:exported=&quot;true&quot;</div><div class="line">       android:process=&quot;:remote&quot;&gt;</div><div class="line">       &lt;intent-filter&gt;</div><div class="line">           &lt;action android:name=&quot;com.jkwar.serviceExample.IRemoteService&quot; /&gt;</div><div class="line">       &lt;/intent-filter&gt;</div><div class="line">   &lt;/service&gt;</div></pre></td></tr></table></figure>
+<p>process有2种赋值：“:remote” 和 “remote”<br>带有”:”的表示该服务所在的进程是私有的，即只要有客户端去启动该服务，系统就会创建一个新的进程来运行该服务。<br>不带有”:”的表示该服务所在的进程是共享的，即当前系统不管有几个客户端去启动该服务，系统中只有一个进程来运行该服务。</p>
+</li>
+<li><p>新建名为client的Module，实现Service通讯。<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%2022.24.59.png" alt=""></p>
+<p>使用bindService启动服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">private ServiceConnection connection = new ServiceConnection() &#123;</div><div class="line">    @Override</div><div class="line">    public void onServiceConnected(ComponentName name, IBinder service) &#123;</div><div class="line">        iRemoteService = IRemoteService.Stub.asInterface(service);</div><div class="line">        Log.d(TAG, &quot;onServiceConnected: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onServiceDisconnected(ComponentName name) &#123;</div><div class="line">        Log.d(TAG, &quot;onServiceDisconnected: &quot;);</div><div class="line">        iRemoteService = null;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>由于Android 5.0不支持隐式Intent。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//第一种方式</div><div class="line">Intent intent = new Intent(IRemoteService.class.getName());</div><div class="line">intent.setClassName(&quot;com.jkwar.serviceExample&quot;, &quot;com.jkwar.serviceExample.RemoteService&quot;);</div><div class="line">//将隐式启动转换为显示启动</div><div class="line">Intent mIntent = new Intent();</div><div class="line">mIntent.setAction(&quot;com.jkwar.serviceExample.IRemoteService&quot;);</div><div class="line">Intent eintent = new Intent(getExplicitIntent(this,mIntent));</div><div class="line">//绑定服务</div><div class="line">bindService(eintent, connection, BIND_AUTO_CREATE);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h3><p><a href="https://github.com/zhanaotian/ServiceExample" target="_blank" rel="external">ServiceExample</a></p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/guolin_blog/article/details/9797169" target="_blank" rel="external">Android Service完全解析，关于服务你所需知道的一切</a><br><a href="http://blog.csdn.net/guolin_blog/article/details/9797169" target="_blank" rel="external">官方Api</a></p>
 
       
     </div>
@@ -540,7 +535,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/状态栏-导航栏/" rel="tag"># 状态栏,导航栏</a>
+            <a href="/tags/Service-详解/" rel="tag"># Service 详解</a>
           
         </div>
       
@@ -553,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/08/Android 半通明状态栏/" rel="next" title="Android 半通明状态栏">
-                <i class="fa fa-chevron-left"></i> Android 半通明状态栏
+              <a href="/2015/11/29/Activity Task相关/" rel="next" title="Activity Task 相关">
+                <i class="fa fa-chevron-left"></i> Activity Task 相关
               </a>
             
           </div>
@@ -563,8 +558,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/06/Android Studio Gradle第三依赖统一管理/" rel="prev" title="Android Studio Gradle 第三方依赖统一管理的几种方式">
-                Android Studio Gradle 第三方依赖统一管理的几种方式 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/19/Android Paint 属性详解/" rel="prev" title="Android Paint 属性详解">
+                Android Paint 属性详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -723,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#淡化状态栏和系统栏"><span class="nav-number">1.</span> <span class="nav-text">淡化状态栏和系统栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示状态栏与导航栏"><span class="nav-number">2.</span> <span class="nav-text">显示状态栏与导航栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏状态栏"><span class="nav-number">3.</span> <span class="nav-text">隐藏状态栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏导航栏"><span class="nav-number">4.</span> <span class="nav-text">隐藏导航栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全屏沉浸式应用"><span class="nav-number">5.</span> <span class="nav-text">全屏沉浸式应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应UI可见性的变化"><span class="nav-number">6.</span> <span class="nav-text">响应UI可见性的变化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-简介"><span class="nav-number">1.</span> <span class="nav-text">Service 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Service-生命周期图"><span class="nav-number">2.</span> <span class="nav-text">Service 生命周期图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前台-Service"><span class="nav-number">3.</span> <span class="nav-text">前台 Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程Service（AIDL）"><span class="nav-number">4.</span> <span class="nav-text">远程Service（AIDL）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码下载"><span class="nav-number">5.</span> <span class="nav-text">源码下载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">5.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

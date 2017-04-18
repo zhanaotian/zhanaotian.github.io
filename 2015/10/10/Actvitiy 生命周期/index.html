@@ -131,7 +131,7 @@ Activity/Running该状态下，Activity处于Activity栈的最顶层，可见，
 Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明的Activity所遮盖">
 <meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png">
 <meta property="og:image" content="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png">
-<meta property="og:updated_time" content="2017-04-09T07:13:50.000Z">
+<meta property="og:updated_time" content="2017-04-09T08:05:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Activity 生命周期">
 <meta name="twitter:description" content="Activity 生命周期是什么？
@@ -539,7 +539,15 @@ Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明
 <p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
 <p>由于 onCreate() 方法会在第一次创建新的Activity实例与重新创建之前被Destory的实例时都被调用，我们必须在尝试读取 Bundle 对象前检测它是否为null。如果它为null，系统则是创建一个新的Activity实例，而不是恢复之前被Destory的Activity。</p>
 <p>onRestoreInstanceState()方法会在 onStart() 方法之后执行. 系统仅仅会在存在需要恢复的状态信息时才会调用 onRestoreInstanceState() ，因此不需要检查 Bundle 是否为null。</p>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/eclipsexys/article/details/47405045" target="_blank" rel="external">Android 群英传</a><br><a href="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/index.html" target="_blank" rel="external">管理Activity的生命周期</a></p>
+<h3 id="横竖屏切换时Android-生命周期"><a href="#横竖屏切换时Android-生命周期" class="headerlink" title="横竖屏切换时Android 生命周期"></a>横竖屏切换时Android 生命周期</h3><ul>
+<li><p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次。</p>
+</li>
+<li><p>设置Activity的android:configChanges=”orientation”时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次。</p>
+</li>
+<li><p>设置Activity的android:configChanges=”orientation|keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法。</p>
+</li>
+</ul>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/eclipsexys/article/details/47405045" target="_blank" rel="external">Android 群英传</a><br><a href="https://developer.android.google.cn/training/index.html" target="_blank" rel="external">Android官方培训</a><br><a href="https://developer.android.google.cn/reference/android/app/Activity.html" target="_blank" rel="external">Activity Api</a></p>
 
       
     </div>
@@ -664,7 +672,7 @@ Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -675,7 +683,7 @@ Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -686,7 +694,7 @@ Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -748,7 +756,7 @@ Paused该状态下，Activity失去焦点，被另外一个非全屏或者通明
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-生命周期是什么？"><span class="nav-number">1.</span> <span class="nav-text">Activity 生命周期是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-形态"><span class="nav-number">2.</span> <span class="nav-text">Activity 形态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期图"><span class="nav-number">3.</span> <span class="nav-text">生命周期图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动与销毁Activity的过程"><span class="nav-number">3.1.</span> <span class="nav-text">启动与销毁Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停与恢复Activity的过程"><span class="nav-number">3.2.</span> <span class="nav-text">暂停与恢复Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止与重启Activity的过程"><span class="nav-number">3.3.</span> <span class="nav-text">停止与重启Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新创建Activity"><span class="nav-number">3.4.</span> <span class="nav-text">重新创建Activity</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">3.4.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-生命周期是什么？"><span class="nav-number">1.</span> <span class="nav-text">Activity 生命周期是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Activity-形态"><span class="nav-number">2.</span> <span class="nav-text">Activity 形态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期图"><span class="nav-number">3.</span> <span class="nav-text">生命周期图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动与销毁Activity的过程"><span class="nav-number">3.1.</span> <span class="nav-text">启动与销毁Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#暂停与恢复Activity的过程"><span class="nav-number">3.2.</span> <span class="nav-text">暂停与恢复Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止与重启Activity的过程"><span class="nav-number">3.3.</span> <span class="nav-text">停止与重启Activity的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新创建Activity"><span class="nav-number">3.4.</span> <span class="nav-text">重新创建Activity</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#横竖屏切换时Android-生命周期"><span class="nav-number">4.</span> <span class="nav-text">横竖屏切换时Android 生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">4.0.1.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
