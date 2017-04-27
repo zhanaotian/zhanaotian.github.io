@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jkwarthegarden.com/"/>
-  <updated>2017-04-06T11:35:23.000Z</updated>
+  <updated>2017-04-19T07:38:59.000Z</updated>
   <id>http://jkwarthegarden.com/</id>
   
   <author>
@@ -14,41 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Android Studio Gradle 第三方依赖统一管理的几种方式</title>
-    <link href="http://jkwarthegarden.com/2017/04/06/Android%20Studio%20Gradle%E7%AC%AC%E4%B8%89%E4%BE%9D%E8%B5%96%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86/"/>
-    <id>http://jkwarthegarden.com/2017/04/06/Android Studio Gradle第三依赖统一管理/</id>
-    <published>2017-04-06T11:33:00.000Z</published>
-    <updated>2017-04-06T11:35:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h3><p>假设你的 Project 结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">  --module1</div><div class="line">    --build.gradle</div><div class="line">  --module2</div><div class="line">    --build.gradle</div><div class="line">  ...</div><div class="line">  --build.gradle</div></pre></td></tr></table></figure></p>
-<a id="more"></a>  
-<p>###使用脚本 config.gradle<br>为了方便管理，可以在根目录下新建 config.gradle 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">  --module1</div><div class="line">    --build.gradle</div><div class="line">  --module2</div><div class="line">    --build.gradle</div><div class="line">  ...</div><div class="line">  --build.gradle</div><div class="line">  --config.gradle</div></pre></td></tr></table></figure></p>
-<p>在 config.gradle 中添加如下代码（具体情况根据自己项目来定）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">ext &#123;</div><div class="line">    kotlin_version = &apos;1.1.0&apos;</div><div class="line"></div><div class="line">    android = [</div><div class="line">            compileSdkVersion: 25,</div><div class="line">            buildToolsVersion: &quot;25.0.2&quot;,</div><div class="line">            applicationId    : &quot;com.jkwar.TomatoWork&quot;,</div><div class="line">            minSdkVersion    : 15,</div><div class="line">            targetSdkVersion : 25,</div><div class="line">            versionCode      : 1,</div><div class="line">            versionName      : &quot;1.0&quot;</div><div class="line">    ]</div><div class="line"></div><div class="line">    dependencies = [</div><div class="line">            &quot;kotlin-stdlib&quot;       : &quot;org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version&quot;,</div><div class="line">            &quot;appcompat-v7&quot;        : &quot;com.android.support:appcompat-v7:25.3.1&quot;,</div><div class="line">            &quot;constraint-layout&quot;   : &quot;com.android.support.constraint:constraint-layout:1.0.2&quot;,</div><div class="line">            &quot;rxjava&quot;              : &quot;io.reactivex.rxjava2:rxjava:2.0.8&quot;,</div><div class="line">            &quot;rxandroid&quot;           : &quot;io.reactivex.rxjava2:rxandroid:2.0.1&quot;,</div><div class="line">            &quot;retrofit&quot;            : &quot;com.squareup.retrofit2:retrofit:2.2.0&quot;,</div><div class="line">            &quot;gson&quot;                : &quot;com.google.code.gson:gson:2.6.2&quot;,</div><div class="line">            &quot;converter-gson&quot;      : &quot;com.squareup.retrofit2:converter-gson:2.2.0&quot;,</div><div class="line">            &quot;adapter-rxjava&quot;      : &quot;com.squareup.retrofit2:adapter-rxjava2:2.2.0&quot;,</div><div class="line">            &quot;logging-interceptor&quot; : &quot;com.squareup.okhttp3:logging-interceptor:3.6.0&quot;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在 root 目录下的build.gradle 中加上apply from: “config.gradle”<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.09.53.png" alt=""></p>
-<p>在需要添加依赖的 Module 中使用</p>
-<ul>
-<li>android 节点的使用<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.11.33.png" alt=""></li>
-<li>dependencies 节点的使用<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.11.24.png" alt=""></li>
-</ul>
-<h3 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h3><p>不新建config.gradle 文件，使用跟目录下的build.gradle文件。</p>
-<h3 id="第三种方式"><a href="#第三种方式" class="headerlink" title="第三种方式"></a>第三种方式</h3><p>使用配置文件 gradle.properties（通常 IDE 会自动生成此文件），在此文件中添加键值对：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rxjava=io.reactivex.rxjava2:rxjava:2.0.8</div><div class="line">rxandroid=io.reactivex.rxjava2:rxandroid:2.0.1</div></pre></td></tr></table></figure></p>
-<p>在 Module 的 build.gradle 中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile rxjava</div><div class="line">    compile rxandroid</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;第一种方式&quot;&gt;&lt;a href=&quot;#第一种方式&quot; class=&quot;headerlink&quot; title=&quot;第一种方式&quot;&gt;&lt;/a&gt;第一种方式&lt;/h3&gt;&lt;p&gt;假设你的 Project 结构如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;root&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --module1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --build.gradle&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --module2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --build.gradle&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --build.gradle&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Android Studio" scheme="http://jkwarthegarden.com/categories/Android-Studio/"/>
-    
-    
-      <category term="Gradle" scheme="http://jkwarthegarden.com/tags/Gradle/"/>
-    
-  </entry>
   
   <entry>
     <title>Android 启动Java8的lambad表达式</title>
@@ -72,6 +37,215 @@
     
     
       <category term="lambad" scheme="http://jkwarthegarden.com/tags/lambad/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fragment 详解（三）</title>
+    <link href="http://jkwarthegarden.com/2016/04/27/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <id>http://jkwarthegarden.com/2016/04/27/Fragment 详解（三）/</id>
+    <published>2016-04-26T16:00:00.000Z</published>
+    <updated>2017-04-27T08:28:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Fragment的startActivityForResult"><a href="#Fragment的startActivityForResult" class="headerlink" title="Fragment的startActivityForResult"></a>Fragment的startActivityForResult</h3><blockquote>
+<p>Fragment的startActivityForResult和Activity的startActivityForResult类似，只不过fragment没有setResult方法，所以只能使用父activity的setResult方法。</p>
+</blockquote>
+ <a id="more"></a>  
+<p>水果列表页<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">public class FruitsListFragment extends ListFragment &#123;</div><div class="line">    public static final int REQUEST_CODE=0x110;</div><div class="line">    public static final String REQUEST_DETAIL=&quot;request_detail&quot;;</div><div class="line">    private ArrayAdapter&lt;String&gt; mAdapter;</div><div class="line"></div><div class="line">    private int mPostion;</div><div class="line"></div><div class="line">    private List&lt;String&gt; mList = Arrays.asList(&quot;苹果&quot;, &quot;香蕉&quot;, &quot;玻璃&quot;, &quot;梨子&quot;, &quot;西瓜&quot;, &quot;橙子&quot;);</div><div class="line"></div><div class="line">    public FruitsListFragment() &#123;</div><div class="line">        // Required empty public constructor</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onListItemClick(ListView l, View v, int position, long id) &#123;</div><div class="line">        mPostion = position;</div><div class="line">        Intent intent = new Intent(getActivity(), FruitsDetailsActivity.class);</div><div class="line">        intent.putExtra(REQUEST_DETAIL, mList.get(position));</div><div class="line">        //跳转</div><div class="line">        startActivityForResult(intent, REQUEST_CODE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onActivityCreated(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onActivityCreated(savedInstanceState);</div><div class="line">        mAdapter = new ArrayAdapter&lt;&gt;(getActivity(), android.R.layout.simple_list_item_1, mList);</div><div class="line">        //设置适配器</div><div class="line">        setListAdapter(mAdapter);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</div><div class="line">        //修改数据</div><div class="line">        if (requestCode==REQUEST_CODE) &#123;</div><div class="line">            mList.set(mPostion,data.getStringExtra(REQUEST_DETAIL));</div><div class="line">            mAdapter.notifyDataSetChanged();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>详情页<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">public class FruitsDetailsFragment extends Fragment &#123;</div><div class="line"></div><div class="line">    private static final String ARG_PARAM1 = &quot;param1&quot;;</div><div class="line"></div><div class="line">    private String mParam1;</div><div class="line"></div><div class="line">    public FruitsDetailsFragment() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static FruitsDetailsFragment newInstance(String param1) &#123;</div><div class="line">        FruitsDetailsFragment fragment = new FruitsDetailsFragment();</div><div class="line">        Bundle args = new Bundle();</div><div class="line">        args.putString(ARG_PARAM1, param1);</div><div class="line">        fragment.setArguments(args);</div><div class="line">        return fragment;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        if (getArguments() != null) &#123;</div><div class="line">            mParam1 = getArguments().getString(ARG_PARAM1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        View view=inflater.inflate(R.layout.fragment_fragment_fruits_details, container, false);</div><div class="line">        final EditText editText= (EditText) view.findViewById(R.id.fruits_details_ed);</div><div class="line">        editText.setText(mParam1);</div><div class="line">        view.findViewById(R.id.updateBtn).setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                Intent intent = new Intent();</div><div class="line">                intent.putExtra(REQUEST_DETAIL, editText.getText().toString());</div><div class="line">                getActivity().setResult(110, intent);</div><div class="line">                getActivity().finish();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        return view;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="嵌套Fragment"><a href="#嵌套Fragment" class="headerlink" title="嵌套Fragment"></a>嵌套Fragment</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public class ParentFragment extends Fragment &#123;</div><div class="line">    public ParentFragment() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        return inflater.inflate(R.layout.fragment_parent, container, false);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) &#123;</div><div class="line">        Fragment childFragment = new ChildFragment();</div><div class="line">        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();</div><div class="line">        transaction.replace(R.id.child_fragment_container, childFragment).commit();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static class ChildFragment extends Fragment &#123;</div><div class="line">        @Override</div><div class="line">        public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) &#123;</div><div class="line">            return inflater.inflate(R.layout.fragment_child, container, false);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>fragment_parent.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;fill_parent&quot;</div><div class="line">    android:layout_height=&quot;fill_parent&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;200dp&quot;</div><div class="line">        android:gravity=&quot;center&quot;</div><div class="line">        android:textSize=&quot;26sp&quot;</div><div class="line">        android:background=&quot;@color/colorAccent&quot;</div><div class="line">        android:text=&quot;I am the parent fragment&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;FrameLayout</div><div class="line">        android:id=&quot;@+id/child_fragment_container&quot;</div><div class="line">        android:layout_width=&quot;fill_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot; /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>fragment_child.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:gravity=&quot;center&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;ChildFragment&quot;</div><div class="line">        android:textSize=&quot;26sp&quot; /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/zhanaotian/FragmentDemo/tree/master" target="_blank" rel="external">源码下载</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Fragment的startActivityForResult&quot;&gt;&lt;a href=&quot;#Fragment的startActivityForResult&quot; class=&quot;headerlink&quot; title=&quot;Fragment的startActivityForResult&quot;&gt;&lt;/a&gt;Fragment的startActivityForResult&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Fragment的startActivityForResult和Activity的startActivityForResult类似，只不过fragment没有setResult方法，所以只能使用父activity的setResult方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/categories/Fragment/"/>
+    
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fragment 详解（二）</title>
+    <link href="http://jkwarthegarden.com/2016/04/26/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://jkwarthegarden.com/2016/04/26/Fragment 详解（二）/</id>
+    <published>2016-04-25T16:00:00.000Z</published>
+    <updated>2017-04-27T08:29:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Activity与Fragment通信"><a href="#Activity与Fragment通信" class="headerlink" title="Activity与Fragment通信"></a>Activity与Fragment通信</h3><blockquote>
+<p>一个activity通常包含多个fragment，而fragment通常只能与其父activity通信，fragment把activity视为与其他fragment交互的桥梁。要记住的是fragment不应该互相沟通，而应该只通过其父activity进行沟通，因为fragment应该是模块化、独立、可重复使用的组件，fragment互相通信不符合低耦合，高内聚的设计。</p>
+</blockquote>
+<p>fragment与activity通信有三种方法：</p>
+<ul>
+<li>Bundle     activity构造一个fragment并设置参数</li>
+<li>方法       activity可以调用fragment实例上面的方法</li>
+<li><p>Listener   fragment可以通过界面触发activity中的侦听事件</p>
+<a id="more"></a>  
+</li>
+</ul>
+<h4 id="Fragment-with-Arguments"><a href="#Fragment-with-Arguments" class="headerlink" title="Fragment with Arguments"></a>Fragment with Arguments</h4><blockquote>
+<p>修改刚刚的LifecycleFragment，创建一个使用newInstance参数创建fragment的静态方法，并设置参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class FooFragment extends Fragment &#123;</div><div class="line">  private static final String ARG_PARAM1 = &quot;param1&quot;;</div><div class="line">  private String mParam1;</div><div class="line">  public static FooFragment newInstance(String param1) &#123;</div><div class="line">        FooFragment fragment = new FooFragment();</div><div class="line">        Bundle args = new Bundle();</div><div class="line">        args.putString(ARG_PARAM1, param1);</div><div class="line">        fragment.setArguments(args);</div><div class="line">        return fragment;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>在onCreate访问参数，获取数据。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        if (getArguments() != null) &#123;</div><div class="line">            mParam1 = getArguments().getString(ARG_PARAM1);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在DynamicAddActivity中动态加载fragment<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FragmentTransaction ft = getSupportFragmentManager().beginTransaction();</div><div class="line">FooFragment fragment = FooFragment.newInstance(&quot;fragment 生命周期&quot;);</div><div class="line">ft.replace(R.id.content, fragment);</div><div class="line">ft.commit();</div></pre></td></tr></table></figure></p>
+<h4 id="Fragment-Methods"><a href="#Fragment-Methods" class="headerlink" title="Fragment Methods"></a>Fragment Methods</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class FooFragment extends Fragment &#123;</div><div class="line">  public void setParam(String param) &#123;</div><div class="line">        textView.setText(param);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">if (fooFragment!=null&amp;&amp;fooFragment.isVisible()) &#123;</div><div class="line">            fooFragment.setParam(link+1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="Fragment-Listener"><a href="#Fragment-Listener" class="headerlink" title="Fragment Listener"></a>Fragment Listener</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">public class FooFragment extends Fragment &#123;</div><div class="line">  private OnItemSelectedListener listener;</div><div class="line"></div><div class="line">  public interface OnItemSelectedListener &#123;</div><div class="line">        public void onItemSelected(String link);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public void onAttach(Context context) &#123;</div><div class="line">      super.onAttach(context);</div><div class="line">    if (context instanceof OnItemSelectedListener) &#123;</div><div class="line">          listener = (OnItemSelectedListener) context;</div><div class="line">    &#125; else &#123;</div><div class="line">          throw new ClassCastException(context.toString()</div><div class="line">                    + &quot; must implement MyListFragment.OnItemSelectedListener&quot;);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Override</div><div class="line">  public View onCreateView(LayoutInflater inflater, ViewGroup container,</div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        // Inflate the layout for this fragment</div><div class="line">        View view = inflater.inflate(R.layout.fragment_foo, container, false);</div><div class="line">        textView = (TextView) view.findViewById(R.id.textView1);</div><div class="line">        textView.setText(mParam1);</div><div class="line">        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() &#123;</div><div class="line">            @Override</div><div class="line">            public void onClick(View v) &#123;</div><div class="line">                if (listener != null) &#123;</div><div class="line">                    listener.onItemSelected(textView.getText().toString());</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        return view;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在activity中实现OnItemSelectedListener监听器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class DynamicAddActivity extends AppCompatActivity implements FooFragment.OnItemSelectedListener&#123;</div><div class="line">    @Override</div><div class="line">    public void onItemSelected(String link) &#123;</div><div class="line">        if (fooFragment!=null&amp;&amp;fooFragment.isVisible()) &#123;</div><div class="line">            fooFragment.setParam(link+1);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="给fragment添加导航菜单"><a href="#给fragment添加导航菜单" class="headerlink" title="给fragment添加导航菜单"></a>给fragment添加导航菜单</h3><ol>
+<li><p>在Fragment的onCreate加载菜单项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">     super.onCreate(savedInstanceState);</div><div class="line">     setHasOptionsMenu(true);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过onCreateOptionsMenu直接向Fragment添加菜单项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) &#123;</div><div class="line">      inflater.inflate(R.menu.fragment_menu, menu);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过onOptionsItemSelected管理Fragment的菜单项。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean onOptionsItemSelected(MenuItem item) &#123;</div><div class="line">        switch (item.getItemId()) &#123;</div><div class="line">            case R.id.edit_item:</div><div class="line">                Toast.makeText(getActivity(), &quot;点击&quot;, Toast.LENGTH_SHORT).show();</div><div class="line">                return true;</div><div class="line">            default:</div><div class="line">                return super.onOptionsItemSelected(item);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="查找Fragment实例"><a href="#查找Fragment实例" class="headerlink" title="查找Fragment实例"></a>查找Fragment实例</h3><blockquote>
+<p>通常我们需要在Activity布局文件中查找Fragment实例，有3种查找现有Fragment实例的方法：</p>
+</blockquote>
+<ol>
+<li>ID -通过调用查找片段findFragmentById上FragmentManager</li>
+<li>Tag -通过调用查找片段findFragmentByTag上FragmentManager</li>
+<li>Pager -通过调用getRegisteredFragmenta 查找片段PagerAdapter</li>
+</ol>
+<h4 id="通过ID查找Fragment。"><a href="#通过ID查找Fragment。" class="headerlink" title="通过ID查找Fragment。"></a>通过ID查找Fragment。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public class SingleFragmentActivity extends AppCompatActivity &#123;</div><div class="line">    public Fragment createFragment();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_content);</div><div class="line">        //fragment管理器</div><div class="line">        FragmentManager fm = getSupportFragmentManager();</div><div class="line">        //根据id查找fragment实例</div><div class="line">        Fragment fragment = fm.findFragmentById(R.id.content);</div><div class="line">        //通过判断savedInstanceState时候为空，登出activity时候重新创建</div><div class="line">        if (fragment == null) &#123;</div><div class="line">            fragment = createFragment();</div><div class="line">            //添加</div><div class="line">            fm.beginTransaction().add(R.id.content, fragment).commit();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="通过Tag查找Fragment实例。"><a href="#通过Tag查找Fragment实例。" class="headerlink" title="通过Tag查找Fragment实例。"></a>通过Tag查找Fragment实例。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class SingleFragmentActivity extends AppCompatActivity &#123;</div><div class="line">    @Override</div><div class="line">    public void onCreate(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_content);</div><div class="line">        //fragment管理器</div><div class="line">        FragmentManager fm = getSupportFragmentManager();</div><div class="line">        //根据id查找fragment实例</div><div class="line">        Fragment fragment = fm.findFragmentByTag(“lifecycle”);</div><div class="line">        //通过判断savedInstanceState时候为空，登出activity时候重新创建</div><div class="line">        if (fragment == null) &#123;</div><div class="line">            //添加</div><div class="line">            fm.beginTransaction().add(R.id.content, fragment).commit();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="如果你使用FragmentPagerAdapter可以通过getRegisteredFragment获取fragment实例。"><a href="#如果你使用FragmentPagerAdapter可以通过getRegisteredFragment获取fragment实例。" class="headerlink" title="如果你使用FragmentPagerAdapter可以通过getRegisteredFragment获取fragment实例。"></a>如果你使用FragmentPagerAdapter可以通过getRegisteredFragment获取fragment实例。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adapterViewPager.getRegisteredFragment(0);</div></pre></td></tr></table></figure>
+<h3 id="管理Fragment回退栈"><a href="#管理Fragment回退栈" class="headerlink" title="管理Fragment回退栈"></a>管理Fragment回退栈</h3><blockquote>
+<p>fragment栈，和activity栈类似，我们可以通过activity维护一个回退栈来保存每次Fragment事务发生的变化。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">final FragmentManager fm = getSupportFragmentManager();</div><div class="line">        //创建事务</div><div class="line">        FragmentTransaction fx = fm.beginTransaction();</div><div class="line">        if (oneFragment == null) &#123;</div><div class="line">            oneFragment = new OneFragment();</div><div class="line">            fx.addToBackStack(&quot;one_Fragment&quot;);</div><div class="line">            fx.add(R.id.fragmenttask_content, oneFragment, &quot;oneFragment&quot;).commit();</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>从fragment栈弹出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (fm.getBackStackEntryCount() &gt; 0) &#123;</div><div class="line">       fm.popBackStack();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><a href="https://github.com/zhanaotian/FragmentDemo/tree/master" target="_blank" rel="external">源码下载</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Activity与Fragment通信&quot;&gt;&lt;a href=&quot;#Activity与Fragment通信&quot; class=&quot;headerlink&quot; title=&quot;Activity与Fragment通信&quot;&gt;&lt;/a&gt;Activity与Fragment通信&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;一个activity通常包含多个fragment，而fragment通常只能与其父activity通信，fragment把activity视为与其他fragment交互的桥梁。要记住的是fragment不应该互相沟通，而应该只通过其父activity进行沟通，因为fragment应该是模块化、独立、可重复使用的组件，fragment互相通信不符合低耦合，高内聚的设计。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;fragment与activity通信有三种方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bundle     activity构造一个fragment并设置参数&lt;/li&gt;
+&lt;li&gt;方法       activity可以调用fragment实例上面的方法&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Listener   fragment可以通过界面触发activity中的侦听事件&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/categories/Fragment/"/>
+    
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/tags/Fragment/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Fragment 详解（一）</title>
+    <link href="http://jkwarthegarden.com/2016/04/25/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://jkwarthegarden.com/2016/04/25/Fragment 详解（一）/</id>
+    <published>2016-04-24T16:00:00.000Z</published>
+    <updated>2017-04-27T08:29:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Fragment-简介"><a href="#Fragment-简介" class="headerlink" title="Fragment 简介"></a>Fragment 简介</h3><blockquote>
+<p>Android 在 Android 3.0（API 级别  11）中引入了片段，主要是为了给大屏幕（如平板电脑）<br>上更加动态和灵活的UI设计提供支持。可以将多个Fragmen组合在一个Activity中来构建多窗格UI，<br>以及在多个Activity中重复使用某个Fragment，可以将Fragment视为Activity的模块化组成部分。<br>Fragment是必须嵌入Activity中，其生命周期直接受宿主 Activity 生命周期的影响，<br>它不能独立于Activity运行。</p>
+</blockquote>
+<p><img src="https://developer.android.google.cn/images/fundamentals/fragments.png" alt=""></p>
+ <a id="more"></a>  
+<h3 id="定义-Fragment"><a href="#定义-Fragment" class="headerlink" title="定义 Fragment"></a>定义 Fragment</h3><blockquote>
+<p>在Android studio 新建FragmentDemo，然后新建一个FooFragment（右键-&gt;New-&gt;Fragment-&gt;Fragment(Blank)-&gt;FooFragment），不勾选inclue fragment fatoty methods ？、Inclue interface callback ？</p>
+</blockquote>
+<p>FooFragment 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public class FooFragment extends Fragment &#123;</div><div class="line">    public FooFragment() &#123;</div><div class="line">        // Required empty public constructor</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        // Inflate the layout for this fragment</div><div class="line">        return inflater.inflate(R.layout.fragment_foo, container, false);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>fragment_foo.xml 代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:gravity=&quot;center&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;&gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=&quot;@+id/textView1&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;TextView&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/button1&quot;</div><div class="line">        android:layout_width=&quot;wrap_content&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;button&quot; /&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<p>向Activity 中嵌入Fragment有2种方式：</p>
+<ul>
+<li>静态使用XML</li>
+<li>动态使用Java代码</li>
+</ul>
+<h4 id="静态嵌入"><a href="#静态嵌入" class="headerlink" title="静态嵌入"></a>静态嵌入</h4><blockquote>
+<p>新建一个Activity，命名为StateAddActivity，将fragment添加到StateAddActivity的xml布局文件中。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class StateAddActivity extends AppCompatActivity &#123;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.activity_stateadd);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>activity_stateadd.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:orientation=&quot;vertical&quot; &gt;</div><div class="line"></div><div class="line">    &lt;fragment</div><div class="line">        android:name=&quot;com.jkwar.FragmentDemo.fragment.FooFragment&quot;</div><div class="line">        android:id=&quot;@+id/fooFragment&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;match_parent&quot;</div><div class="line">        /&gt;</div><div class="line"></div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="动态嵌入"><a href="#动态嵌入" class="headerlink" title="动态嵌入"></a>动态嵌入</h4><blockquote>
+<p>新建一个Activity，命名为DynamicAddActivity，通过FragmentManager类和FragmentTransaction类添加，删除和替换Fragment。</p>
+</blockquote>
+<p>判断Fragment 状态的常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>isAdded()</td>
+<td style="text-align:center">如果fragment被添加到了activity中那么返回true，否则返回false</td>
+</tr>
+<tr>
+<td>isHidden()</td>
+<td style="text-align:center">如果fragment对象被隐藏那么返回true，否则返回false</td>
+</tr>
+<tr>
+<td>isRemoving()</td>
+<td style="text-align:center">如果fragment对象正在从父Activity中被删除那么返回true，否则返回false</td>
+</tr>
+<tr>
+<td>isResumed()</td>
+<td style="text-align:center">如果Fragment对象是在恢复状态中那么方法ture，否则返回false</td>
+</tr>
+<tr>
+<td>isVisible()</td>
+<td style="text-align:center">如果该Fragment对象对用户可见那么就返回true，否则返回false</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">//fragment 管理器</div><div class="line">FragmentManager fm;</div><div class="line">FooFragment fooFragment;</div><div class="line"></div><div class="line">@Override</div><div class="line">protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">      super.onCreate(savedInstanceState);</div><div class="line">      setContentView(R.layout.activity_dynamic_add);</div><div class="line">      ButterKnife.bind(this);</div><div class="line">      //初始化</div><div class="line">      fm = getSupportFragmentManager();</div><div class="line">&#125;</div><div class="line"></div><div class="line">public void onViewClicked(View view) &#123;</div><div class="line">      //fragment事务</div><div class="line">      FragmentTransaction bt = fm.beginTransaction();</div><div class="line">      switch (view.getId()) &#123;</div><div class="line">          case R.id.addBtn:</div><div class="line">              if (fooFragment == null) &#123;</div><div class="line">                  fooFragment =new FooFragment();</div><div class="line">                  bt.add(R.id.dynamic_content, fooFragment, &quot;fooFragment&quot;);</div><div class="line">              &#125; else &#123;</div><div class="line">                  bt.replace(R.id.dynamic_content, fooFragment, &quot;fooFragment&quot;);</div><div class="line">              &#125;</div><div class="line">              break;</div><div class="line">          case R.id.removeBtn:</div><div class="line">              if (fooFragment != null &amp;&amp; fooFragment.isAdded()) &#123;</div><div class="line">                  bt.remove(fooFragment);</div><div class="line">              &#125;</div><div class="line">              break;</div><div class="line">          case R.id.hideBtn:</div><div class="line">              if (fooFragment != null &amp;&amp; fooFragment.isVisible()) &#123;</div><div class="line">                  bt.hide(fooFragment);</div><div class="line">              &#125;</div><div class="line">              break;</div><div class="line">          case R.id.showBtn:</div><div class="line">              if (fooFragment != null &amp;&amp; fooFragment.isHidden()) &#123;</div><div class="line">                  bt.show(fooFragment);</div><div class="line">              &#125;</div><div class="line">              break;</div><div class="line">          case R.id.replaceBtn:</div><div class="line">              FooFragment ff = FooFragment.newInstance(&quot;梨子&quot;);</div><div class="line">              bt.replace(R.id.dynamic_content, ff, &quot;ff&quot;);</div><div class="line">              break;</div><div class="line">      &#125;</div><div class="line">      //事务提交</div><div class="line">      bt.commit();</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>activity_dynamic_add.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</div><div class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</div><div class="line">    android:layout_width=&quot;match_parent&quot;</div><div class="line">    android:layout_height=&quot;match_parent&quot;</div><div class="line">    android:orientation=&quot;vertical&quot;</div><div class="line">    android:id=&quot;@+id/dynamic_content&quot;</div><div class="line">    tools:context=&quot;com.jkwar.FragmentDemo.activity.DynamicAddActivity&quot;&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/addBtn&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;添加&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/removeBtn&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;移除&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/hideBtn&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;隐藏&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/showBtn&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;显示&quot; /&gt;</div><div class="line"></div><div class="line">    &lt;Button</div><div class="line">        android:id=&quot;@+id/replaceBtn&quot;</div><div class="line">        android:layout_width=&quot;match_parent&quot;</div><div class="line">        android:layout_height=&quot;wrap_content&quot;</div><div class="line">        android:text=&quot;替换&quot; /&gt;</div><div class="line">&lt;/LinearLayout&gt;</div></pre></td></tr></table></figure>
+<h3 id="Fragment-的生命周期"><a href="#Fragment-的生命周期" class="headerlink" title="Fragment 的生命周期"></a>Fragment 的生命周期</h3><p><img src="http://oglc61v4u.bkt.clouddn.com/0EVReuq.png" alt=""></p>
+<blockquote>
+<p>Fragment所在的Activity的生命周期会影响Fragment的生命周期，表现为Activity的每次生命周期回调都会引发每个Fragment的类似回调，比如：当Activity收到onPause（）时，Activity的每个Fragment都会收到onPause（）。<br>不过，fragment还有几个额外的生命周期，用于处理与Activity的交互，构造、销毁fragment UI等操作。这些回调方法是：</p>
+</blockquote>
+<ul>
+<li>onAttach（）：Fragment和Activity建立关联的时候调用。</li>
+<li>onCreateView()：为Fragment加载布局时调用。</li>
+<li>onActivityCreated()：当Activity中的onCreate方法执行完后调用。</li>
+<li>onDestroyView()：Fragment中的布局被移除时调用。</li>
+<li>onDetach()：Fragment和Activity解除关联的时候调用。</li>
+</ul>
+<p>我们通过代码了解一下Fragment 生命周期：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line">public class LifecycleFragment extends Fragment &#123;</div><div class="line">    private final String TAG=LifecycleFragment.class.getSimpleName();</div><div class="line"></div><div class="line">    public LifecycleFragment() &#123;</div><div class="line">        // Required empty public constructor</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //在Fragment已与Activity关联时调用</div><div class="line">    @Override</div><div class="line">    public void onAttach(Context context) &#123;</div><div class="line">        super.onAttach(context);</div><div class="line">        Log.d(TAG, &quot;onAttach: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        Log.d(TAG, &quot;onCreate: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //为Fragment加载布局时调用</div><div class="line">    @Override</div><div class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</div><div class="line">                             Bundle savedInstanceState) &#123;</div><div class="line">        Log.d(TAG, &quot;onCreateView: &quot;);</div><div class="line">        return inflater.inflate(R.layout.fragment_lifecycle, container, false);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onViewCreated(view, savedInstanceState);</div><div class="line">        Log.d(TAG, &quot;onViewCreated: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //当Activity中的onCreate方法执行完后调用</div><div class="line">    @Override</div><div class="line">    public void onActivityCreated(@Nullable Bundle savedInstanceState) &#123;</div><div class="line">        super.onActivityCreated(savedInstanceState);</div><div class="line">        Log.d(TAG, &quot;onActivityCreated: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onStart() &#123;</div><div class="line">        super.onStart();</div><div class="line">        Log.d(TAG, &quot;onStart: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResume() &#123;</div><div class="line">        super.onResume();</div><div class="line">        Log.d(TAG, &quot;onResume: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onPause() &#123;</div><div class="line">        super.onPause();</div><div class="line">        Log.d(TAG, &quot;onPause: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //Fragment中的布局被移除时调用</div><div class="line">    @Override</div><div class="line">    public void onDestroyView() &#123;</div><div class="line">        super.onDestroyView();</div><div class="line">        Log.d(TAG, &quot;onDestroyView: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onDestroy() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">        Log.d(TAG, &quot;onDestroy: &quot;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //Fragment和Activity解除关联的时候调用</div><div class="line">    @Override</div><div class="line">    public void onDetach() &#123;</div><div class="line">        super.onDetach();</div><div class="line">        Log.d(TAG, &quot;onDetach: &quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行程序，打印日志如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%2018.01.40.png" alt=""></p>
+<p>点击Home键，打印日志如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%2018.01.54.png" alt=""></p>
+<p>重新进入重新，打印日志如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%2018.02.18.png" alt=""></p>
+<p>点击back键退出重新，打印日志如下：<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%2018.02.29.png" alt=""></p>
+<p><a href="https://github.com/zhanaotian/FragmentDemo/tree/master" target="_blank" rel="external">源码下载</a></p>
+<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://blog.csdn.net/guolin_blog/article/details/8881711" target="_blank" rel="external">http://blog.csdn.net/guolin_blog/article/details/8881711</a>)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Fragment-简介&quot;&gt;&lt;a href=&quot;#Fragment-简介&quot; class=&quot;headerlink&quot; title=&quot;Fragment 简介&quot;&gt;&lt;/a&gt;Fragment 简介&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Android 在 Android 3.0（API 级别  11）中引入了片段，主要是为了给大屏幕（如平板电脑）&lt;br&gt;上更加动态和灵活的UI设计提供支持。可以将多个Fragmen组合在一个Activity中来构建多窗格UI，&lt;br&gt;以及在多个Activity中重复使用某个Fragment，可以将Fragment视为Activity的模块化组成部分。&lt;br&gt;Fragment是必须嵌入Activity中，其生命周期直接受宿主 Activity 生命周期的影响，&lt;br&gt;它不能独立于Activity运行。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://developer.android.google.cn/images/fundamentals/fragments.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/categories/Fragment/"/>
+    
+    
+      <category term="Fragment" scheme="http://jkwarthegarden.com/tags/Fragment/"/>
     
   </entry>
   
@@ -186,6 +360,41 @@
     
     
       <category term="状态栏" scheme="http://jkwarthegarden.com/tags/%E7%8A%B6%E6%80%81%E6%A0%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android Studio Gradle 第三方依赖统一管理的几种方式</title>
+    <link href="http://jkwarthegarden.com/2016/04/06/Android%20Studio%20Gradle%E7%AC%AC%E4%B8%89%E4%BE%9D%E8%B5%96%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86/"/>
+    <id>http://jkwarthegarden.com/2016/04/06/Android Studio Gradle第三依赖统一管理/</id>
+    <published>2016-04-05T16:00:00.000Z</published>
+    <updated>2017-04-27T08:30:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="第一种方式"><a href="#第一种方式" class="headerlink" title="第一种方式"></a>第一种方式</h3><p>假设你的 Project 结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">  --module1</div><div class="line">    --build.gradle</div><div class="line">  --module2</div><div class="line">    --build.gradle</div><div class="line">  ...</div><div class="line">  --build.gradle</div></pre></td></tr></table></figure></p>
+<a id="more"></a>  
+<p>###使用脚本 config.gradle<br>为了方便管理，可以在根目录下新建 config.gradle 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">root</div><div class="line">  --module1</div><div class="line">    --build.gradle</div><div class="line">  --module2</div><div class="line">    --build.gradle</div><div class="line">  ...</div><div class="line">  --build.gradle</div><div class="line">  --config.gradle</div></pre></td></tr></table></figure></p>
+<p>在 config.gradle 中添加如下代码（具体情况根据自己项目来定）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">ext &#123;</div><div class="line">    kotlin_version = &apos;1.1.0&apos;</div><div class="line"></div><div class="line">    android = [</div><div class="line">            compileSdkVersion: 25,</div><div class="line">            buildToolsVersion: &quot;25.0.2&quot;,</div><div class="line">            applicationId    : &quot;com.jkwar.TomatoWork&quot;,</div><div class="line">            minSdkVersion    : 15,</div><div class="line">            targetSdkVersion : 25,</div><div class="line">            versionCode      : 1,</div><div class="line">            versionName      : &quot;1.0&quot;</div><div class="line">    ]</div><div class="line"></div><div class="line">    dependencies = [</div><div class="line">            &quot;kotlin-stdlib&quot;       : &quot;org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version&quot;,</div><div class="line">            &quot;appcompat-v7&quot;        : &quot;com.android.support:appcompat-v7:25.3.1&quot;,</div><div class="line">            &quot;constraint-layout&quot;   : &quot;com.android.support.constraint:constraint-layout:1.0.2&quot;,</div><div class="line">            &quot;rxjava&quot;              : &quot;io.reactivex.rxjava2:rxjava:2.0.8&quot;,</div><div class="line">            &quot;rxandroid&quot;           : &quot;io.reactivex.rxjava2:rxandroid:2.0.1&quot;,</div><div class="line">            &quot;retrofit&quot;            : &quot;com.squareup.retrofit2:retrofit:2.2.0&quot;,</div><div class="line">            &quot;gson&quot;                : &quot;com.google.code.gson:gson:2.6.2&quot;,</div><div class="line">            &quot;converter-gson&quot;      : &quot;com.squareup.retrofit2:converter-gson:2.2.0&quot;,</div><div class="line">            &quot;adapter-rxjava&quot;      : &quot;com.squareup.retrofit2:adapter-rxjava2:2.2.0&quot;,</div><div class="line">            &quot;logging-interceptor&quot; : &quot;com.squareup.okhttp3:logging-interceptor:3.6.0&quot;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在 root 目录下的build.gradle 中加上apply from: “config.gradle”<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.09.53.png" alt=""></p>
+<p>在需要添加依赖的 Module 中使用</p>
+<ul>
+<li>android 节点的使用<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.11.33.png" alt=""></li>
+<li>dependencies 节点的使用<br><img src="http://oglc61v4u.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%2019.11.24.png" alt=""></li>
+</ul>
+<h3 id="第二种方式"><a href="#第二种方式" class="headerlink" title="第二种方式"></a>第二种方式</h3><p>不新建config.gradle 文件，使用跟目录下的build.gradle文件。</p>
+<h3 id="第三种方式"><a href="#第三种方式" class="headerlink" title="第三种方式"></a>第三种方式</h3><p>使用配置文件 gradle.properties（通常 IDE 会自动生成此文件），在此文件中添加键值对：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rxjava=io.reactivex.rxjava2:rxjava:2.0.8</div><div class="line">rxandroid=io.reactivex.rxjava2:rxandroid:2.0.1</div></pre></td></tr></table></figure></p>
+<p>在 Module 的 build.gradle 中使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies &#123;</div><div class="line">    compile rxjava</div><div class="line">    compile rxandroid</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;第一种方式&quot;&gt;&lt;a href=&quot;#第一种方式&quot; class=&quot;headerlink&quot; title=&quot;第一种方式&quot;&gt;&lt;/a&gt;第一种方式&lt;/h3&gt;&lt;p&gt;假设你的 Project 结构如下：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;root&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --module1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --build.gradle&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --module2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    --build.gradle&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  --build.gradle&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Android Studio" scheme="http://jkwarthegarden.com/categories/Android-Studio/"/>
+    
+    
+      <category term="Gradle" scheme="http://jkwarthegarden.com/tags/Gradle/"/>
     
   </entry>
   
@@ -449,209 +658,6 @@
     
     
       <category term="Service 详解" scheme="http://jkwarthegarden.com/tags/Service-%E8%AF%A6%E8%A7%A3/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Activity Task 相关</title>
-    <link href="http://jkwarthegarden.com/2015/11/29/Activity%20Task%E7%9B%B8%E5%85%B3/"/>
-    <id>http://jkwarthegarden.com/2015/11/29/Activity Task相关/</id>
-    <published>2015-11-28T19:54:45.000Z</published>
-    <updated>2017-04-09T07:34:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Android-任务栈简介"><a href="#Android-任务栈简介" class="headerlink" title="Android 任务栈简介"></a>Android 任务栈简介</h3><blockquote>
-<p>在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出（Last In First Out）的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。</p>
-</blockquote>
-<p><img src="http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png" alt=""></p>
- <a id="more"></a>  
-<h3 id="AndroidMainifest启动模式"><a href="#AndroidMainifest启动模式" class="headerlink" title="AndroidMainifest启动模式"></a>AndroidMainifest启动模式</h3><blockquote>
-<p>Android 的启动模式一个有四种，分别是standard、singleTop、singleTask、singleStance，具有不同的功能。</p>
-</blockquote>
-<ol>
-<li><p>standard<br>默认启动模式，每次激活Activity都会创建新的实例，并放入任务栈中。<br>使用场景：大多数的Activity。</p>
-</li>
-<li><p>singleTop<br>如果在任务的栈顶正好存在该Activity的实例，就重用该实例(会调用实例的onNewIntent())，否则就会创建新的实例并放入栈顶，即使栈中已经存在该Activity的实例，只要不在栈顶，都会创建新的实例。<br>使用场景：接受消息后显示的界面（新闻类和阅读类App的内容界面）。</p>
-</li>
-<li><p>singleTask<br>如果在栈中已经有该Activity的实例，就重用该实例(会调用实例的onNewIntent())。重用时，会让该实例回到栈顶，因此在它上面的实例将会被移出栈。如果栈中不存在该实例，将会创建新的实例放入栈中。<br>使用场景：浏览器的主界面或者退出整个应用。浏览器的主界面：不管从多少个应用启动浏览器，只会启动主界面一次，其余情况都会走onNewIntent，并且会清空主界面上面的其他页面。退出整个应<br>用：将主Activity设为SingleTask模式，然后在要退出的Activity中转到主Activity，从而将主Activity之上的Activity都清除，然后重写主Activity的onNewIntent方法，在方法中加上一句finish(),<br>将最后一个Activity结束掉。</p>
-</li>
-<li><p>singleStance<br>在一个新栈中创建该Activity的实例，并让多个应用共享该栈中的该Activity实例。一旦该模式的Activity实例已经存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例( 会调用实例的 onNewIntent() )。其效果相当于多个应用共享一个应用，不管谁激活该 Activity 都会进入同一个应用中。<br>使用场景：如闹铃提醒，将闹铃提醒与闹铃设置分离。singleInstance不要用于中间页面，如果用于中间页面，跳转会有问题，比如：A -&gt; B (singleInstance) -&gt; C，完全退出后，在此启动，首先打开的是B。</p>
-</li>
-</ol>
-<blockquote>
-<p>注意：如果在一个singleTask和singleStance的ActivityA中通过startActivityResult()方法启动另外一个ActivityB，那么系统会直接方法Activity.RESULT_CANCELED而不会再去等待方法。这是游戏系统在Framework层做了限制，所以二种不同Task之间，默认是不能传递数据的，如果一定要传递，那就只能通过Intent来绑定数据。</p>
-</blockquote>
-<h3 id="Intent-Flag-启动模式"><a href="#Intent-Flag-启动模式" class="headerlink" title="Intent Flag 启动模式"></a>Intent Flag 启动模式</h3><ul>
-<li><p>Intent.FLAG_ACTIVITY_NEW_TASK（默认）</p>
-<p>使用一个新的Task来启动一个Activity，但启动的每个Activity都将在一个新的Task，该Flag通常使用在从Service中启动Activity的场景，由于Service中并不存在Activity栈，所以使用该Flag来创建一个新的Activity栈，并创建新的Activity实例。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_SINGLE_TOP</p>
-<p>使用singletop模式来启动一个Activity，与指定android：launchMode=”singleTop“效果相同。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_CLEAR_TOP</p>
-<p>如果设置，并且这个Activity已经在当前的Task中运行，因此，不再是重新启动一个这个Activity的实例，而是在这个Activity上方的所有Activity都将关闭，然后这个Intent会作为一个新的I ntent投递到老的Activity（现在位于顶端）中。<br>例如：假设一个Task中包含这些Activity：A，B，C，D。如果D调用了startActivity()，并且包含一个指向Activity B的Intent，那么，C和D都将结束，然后B接收到这个Intent，因此，目前stack的状况是：A，B。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_NO_HISTORY</p>
-<p>如果设置，这将在Task的Activitystack中设置一个还原点，当Task恢复时，需要清理Activity。也就是说，下一次Task带着 FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记进入前台时（典型的操作是用户在主画面重启它），这个Activity和它之上的都将关闭，以至于用户不能再返回到它们，但是可以回到之前的Activity。<br>例如，一个e-mail应用程序可能有一个操作是查看一个附件，需要启动图片浏览Activity来显示。这个 Activity应该作为e-mail应用程序Task的一部分，因为这是用户在这个Task中触发的操作。然而，当用户离开这个Task，然后从主画面选择e-mail app，我们可能希望回到查看的会话中，但不是查看图片附件，因为这让人困惑。通过在启动图片浏览时设定这个标志，浏览及其它启动的Activity在下次用户返回到mail程序时都将全部清除。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED<br>在重置Task或者启动Activity创建新的Task时生效。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET</p>
-<p>使用这种模式启动Activity，重置该Task时清除该Activity。<br>例如：A以这种模式启动B，B又启动C，当用户离开应用，一段时间后又从Home回到应用，显示A界面，当前Activity栈为A。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_REORDER_TO_FRONT</p>
-<p>如果在Intent中设置，并传递给Context.startActivity()，这个标志将引发已经运行的Activity移动到历史stack的顶端。<br>例如：假设一个Task由四个Activity组成：A,B,C,D。如果D调用startActivity()来启动Activity B，那么，B会移动到历史stack的顶端，现在的次序变成A,C,D,B。如果FLAG_ACTIVITY_CLEAR_TOP标志也设置的话，那么这个标志将被忽略。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS</p>
-<p>如果设置，新的Activity不会在最近启动的Activity的列表中保存。</p>
-</li>
-<li><p>Intent.FLAG_ACTIVITY_FORWARD_RESULT</p>
-<p>如果设置，并且这个Intent用于从一个存在的Activity启动一个新的Activity，那么，这个作为答复目标的Activity将会传到这个新的Activity中。这种方式下，新的Activity可以调用setResult(int)，并且这个结果值将发送给那个作为答复目标的 Activity。</p>
-</li>
-</ul>
-<h3 id="清空任务栈"><a href="#清空任务栈" class="headerlink" title="清空任务栈"></a>清空任务栈</h3><p>  系统提供清空任务栈的方法让我让我们将一个Task清除。通常情况下，我们在AndroidMainifest文件中的<activity>标签中使用以下几种属性来清理任务栈。</activity></p>
-<ul>
-<li><p>clearTaskOnLaunch</p>
-<p>每次返回该Activity时，都将该Activity之上的所有Activity清除，通过这个属性，可以让这个Task每次在初始化的时候，都只 有这个Activity。</p>
-<ul>
-<li>finishOnTaskLaunch</li>
-</ul>
-<p>finishOnTaskLaunch属性与clearTaskOnLaunch类似，只不过finishOnTaskLaunch是作业在自己身上，通过这个属性，当离开这个Activity所在的Task，那么用户返回时，该Activity就会被finish掉。</p>
-</li>
-</ul>
-<ul>
-<li><p>alwaysRetainTaskState</p>
-<p>alwayRetainTaskState属性给Task设置免死金牌，如果如果将Activity的这个属性设置为True，那么该Activity所在的Task将不接受任何清理命令，一直保持当前Task状态。</p>
-</li>
-<li><p>allowTaskReparenting</p>
-<p>Activity实例在当前应用退居后台后，是否能从启动它的那个task移动到有共同affinity的task，“true”表示可以移动，“false”表示它必须呆在当前应用的task中，默认值为false。</p>
-</li>
-</ul>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p>(<a href="http://blog.csdn.net/liuhe688/article/details/6761337" target="_blank" rel="external">http://blog.csdn.net/liuhe688/article/details/6761337</a>)<br>(<a href="https://my.oschina.net/u/2336511/blog/392412" target="_blank" rel="external">https://my.oschina.net/u/2336511/blog/392412</a>)</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;Android-任务栈简介&quot;&gt;&lt;a href=&quot;#Android-任务栈简介&quot; class=&quot;headerlink&quot; title=&quot;Android 任务栈简介&quot;&gt;&lt;/a&gt;Android 任务栈简介&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在Android 系统中，通过栈结构来保存整个APP的Activity，栈的结构是先进先出（Last In First Out）的线性表，当一个Activity启动另外一个Activity的时候，新启动的Activity就会置于任务栈的顶端，并处于活动状态,而启动它的Activity依然保持在任务栈中，处于停止状态，当用户按下返回键或者调用Finish方法时，系统会移除顶部的Activity，让后面的Activity回复活动状态。当然，这里也有特权阶级，就是在AndroidManinifest文件中的属性android：launchMode来设置或者通过Intent的flag来设置。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&quot;http://oglc61v4u.bkt.clouddn.com/Activity%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
-    
-    
-      <category term="Activity Task" scheme="http://jkwarthegarden.com/tags/Activity-Task/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Activity 生命周期</title>
-    <link href="http://jkwarthegarden.com/2015/10/10/Actvitiy%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
-    <id>http://jkwarthegarden.com/2015/10/10/Actvitiy 生命周期/</id>
-    <published>2015-10-09T17:34:14.000Z</published>
-    <updated>2017-04-09T08:05:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="Activity-生命周期是什么？"><a href="#Activity-生命周期是什么？" class="headerlink" title="Activity 生命周期是什么？"></a>Activity 生命周期是什么？</h3><blockquote>
-<p>Activity生命周期是为了更好的管理Activty的一套规则，它可以在多种形态之间进行切换，以此来适应不同的要求。</p>
-</blockquote>
-<h3 id="Activity-形态"><a href="#Activity-形态" class="headerlink" title="Activity 形态"></a>Activity 形态</h3><ul>
-<li><p>Activity/Running<br>该状态下，Activity处于Activity栈的最顶层，可见，并可以与用户进行交互。</p>
-</li>
-<li><p>Paused<br>该状态下，Activity失去焦点，被另外一个非全屏或者通明的Activity所遮盖，Activity就会进入Paused形态，但是它只是失去与用户交互的能力，所有的状态信息，成员变量都还保持着，只有在系统内存极低的情况下，才会被系统回收掉。</p>
-</li>
-<li><p>Stopped<br>该状态下，Activity被另外一个Activity完全覆盖，Activity就会进入Stopped形态，此时它不再可见，但是所有的状态信息，成员变量都还保存着。</p>
-</li>
-<li><p>Killed<br>当Activity被系统回收掉或者Activity从来没有创建过，那么Activity就会处于Killed状态。</p>
-</li>
-</ul>
-<p>由此可见，用户的不同动作，会让Activity在这四种形态将切换，而开发者，虽然可以控制Activity如何生，却无法控制Activity如何死。</p>
- <a id="more"></a>  
-<h3 id="生命周期图"><a href="#生命周期图" class="headerlink" title="生命周期图"></a>生命周期图</h3><blockquote>
-<p>谷歌给我们一张图来揭示Activity的生命周期，它希望Activity的生命周期能被开发者所控制，而不是一匹脱缰的野马。</p>
-</blockquote>
-<p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle.png" alt=""></p>
-<blockquote>
-<p>开发者不必实现所有的生命周期方法，但是我们必须知道每个生命周期状态的含义，可以让我们更好的掌控Activity，让它能更好的完成你所期待的效果。<br>虽然有很多的Activity的生命周期状态，但是其中只有三种状态是稳定的，而其他状态都是过渡状态，很快就会结束。</p>
-</blockquote>
-<ul>
-<li><p>Running<br>该状态下，Activity处于Activity栈顶，用户可以与它交互。</p>
-</li>
-<li><p>Paused<br>当Activity被遮盖时进入这个状态，此时，它不再接受用户输入。</p>
-</li>
-<li><p>Stopped<br>当Activity完全被覆盖是进入这个状态，此时它不可见，仅在后台运行。</p>
-</li>
-</ul>
-<h4 id="启动与销毁Activity的过程"><a href="#启动与销毁Activity的过程" class="headerlink" title="启动与销毁Activity的过程"></a>启动与销毁Activity的过程</h4><blockquote>
-<p>在系统调用onCreate()之后,就马上调用onStart(),之后再调用onResume()，最后停留在Resumed状态，完成启动。系统调用onDestroy()销毁Activity生命周期让它回到Killed形态。</p>
-</blockquote>
-<p>以上过程就是Activity的启动与销毁过程。</p>
-<ul>
-<li><p>onCreate()：声明UI元素，定义成员变量，配置UI等（onCreate里面尽量少做事情，避免程序启动太久都看不到界面）。</p>
-</li>
-<li><p>onDestory()：因为引用会在Activity销毁的时候销毁，而线程不会，如果activity含有在onCreate调用时创建的后台线程，或者是其他有可能导致内存泄漏的资源，则应该在OnDestroy()时进行资源清理，杀死后台线程。</p>
-</li>
-</ul>
-<h4 id="暂停与恢复Activity的过程"><a href="#暂停与恢复Activity的过程" class="headerlink" title="暂停与恢复Activity的过程"></a>暂停与恢复Activity的过程</h4><blockquote>
-<p>当Activity被其他组件阻塞时部分不可见，就会导致当前Activity进入Pause状态，此时系统就会调用activity中的onPause()方法。当阻塞结束后，就会调用onResume()方法恢复到Resumed状态。</p>
-</blockquote>
-<p>以上过程就是Activity的暂停与恢复过程。</p>
-<ul>
-<li><p>onPause()：释放系统资源（如broadcast receivers, sensors，Camera等）、停止动画或者是其他正在运行的操作。</p>
-</li>
-<li><p>onResume()：重新初始化那些在 onPause()中释放的资源，并执行一些停止的操作（如开启动画）。</p>
-</li>
-</ul>
-<h4 id="停止与重启Activity的过程"><a href="#停止与重启Activity的过程" class="headerlink" title="停止与重启Activity的过程"></a>停止与重启Activity的过程</h4><blockquote>
-<p>当Activity部分不可见时，有2种可能，从部分不可见到可见，系统调用onResume()恢复到Resumed状态；从部分不可见到完全不可见，系统调用onStop()停止Activity进入Stopped状态，注意无论什么原因导致Activity停止，系统总是会在onStop()之前调用onPause()方法。当activity从Stopped状态回到前台时，系统调用onRestart()，马上调用onStart()，之后再执行onResume()。</p>
-</blockquote>
-<p>以上过程就是Activity停止和重启启动过程。</p>
-<ul>
-<li><p>onStop()：释放系统资源（在极端情况下，系统会直接杀死我们的app进程，并不执行activity的onDestroy()回调方法，所以要在这些释放系统资源，避免内存泄漏）、执行那些CPU intensive的shut-down操作，例如往数据库写信息。</p>
-</li>
-<li><p>onStart()：重新初始化那些在 onStop()中释放的资源。</p>
-</li>
-</ul>
-<h4 id="重新创建Activity"><a href="#重新创建Activity" class="headerlink" title="重新创建Activity"></a>重新创建Activity</h4><blockquote>
-<p>如果系统长时间处于stopped形态而且此时系统需要更多内存或者系统内存极为紧张时，系统会回收你的Activity，而此时系统会将Actvity状态通过onSaveInstanceState() 方法保存到Bundle对象中，当然我们可以通过增加额外的键值对的集合来保存状态信息，比如在 EditText 组件中的文本或 ListView的滑动位置。当我们需<br>要重新创建Activity的时候，保存的Bundle对象会传递到Activity的onRestoreInstanceState() 方法和onCreate()方法中。</p>
-</blockquote>
-<p><img src="http://hukai.me/android-training-course-in-chinese/basics/activity-lifecycle/basic-lifecycle-savestate.png" alt=""></p>
-<p>由于 onCreate() 方法会在第一次创建新的Activity实例与重新创建之前被Destory的实例时都被调用，我们必须在尝试读取 Bundle 对象前检测它是否为null。如果它为null，系统则是创建一个新的Activity实例，而不是恢复之前被Destory的Activity。</p>
-<p>onRestoreInstanceState()方法会在 onStart() 方法之后执行. 系统仅仅会在存在需要恢复的状态信息时才会调用 onRestoreInstanceState() ，因此不需要检查 Bundle 是否为null。</p>
-<h3 id="横竖屏切换时Android-生命周期"><a href="#横竖屏切换时Android-生命周期" class="headerlink" title="横竖屏切换时Android 生命周期"></a>横竖屏切换时Android 生命周期</h3><ul>
-<li><p>不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次。</p>
-</li>
-<li><p>设置Activity的android:configChanges=”orientation”时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次。</p>
-</li>
-<li><p>设置Activity的android:configChanges=”orientation|keyboardHidden”时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法。</p>
-</li>
-</ul>
-<h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="http://blog.csdn.net/eclipsexys/article/details/47405045" target="_blank" rel="external">Android 群英传</a><br><a href="https://developer.android.google.cn/training/index.html" target="_blank" rel="external">Android官方培训</a><br><a href="https://developer.android.google.cn/reference/android/app/Activity.html" target="_blank" rel="external">Activity Api</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;Activity-生命周期是什么？&quot;&gt;&lt;a href=&quot;#Activity-生命周期是什么？&quot; class=&quot;headerlink&quot; title=&quot;Activity 生命周期是什么？&quot;&gt;&lt;/a&gt;Activity 生命周期是什么？&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;Activity生命周期是为了更好的管理Activty的一套规则，它可以在多种形态之间进行切换，以此来适应不同的要求。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&quot;Activity-形态&quot;&gt;&lt;a href=&quot;#Activity-形态&quot; class=&quot;headerlink&quot; title=&quot;Activity 形态&quot;&gt;&lt;/a&gt;Activity 形态&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Activity/Running&lt;br&gt;该状态下，Activity处于Activity栈的最顶层，可见，并可以与用户进行交互。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Paused&lt;br&gt;该状态下，Activity失去焦点，被另外一个非全屏或者通明的Activity所遮盖，Activity就会进入Paused形态，但是它只是失去与用户交互的能力，所有的状态信息，成员变量都还保持着，只有在系统内存极低的情况下，才会被系统回收掉。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Stopped&lt;br&gt;该状态下，Activity被另外一个Activity完全覆盖，Activity就会进入Stopped形态，此时它不再可见，但是所有的状态信息，成员变量都还保存着。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Killed&lt;br&gt;当Activity被系统回收掉或者Activity从来没有创建过，那么Activity就会处于Killed状态。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;由此可见，用户的不同动作，会让Activity在这四种形态将切换，而开发者，虽然可以控制Activity如何生，却无法控制Activity如何死。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Activity" scheme="http://jkwarthegarden.com/categories/Activity/"/>
-    
-    
-      <category term="Activity 生命周期" scheme="http://jkwarthegarden.com/tags/Activity-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
   </entry>
   

@@ -4,6 +4,86 @@
 
     
   <url>
+    <loc>http://jkwarthegarden.com/2016/04/06/Android%20Studio%20Gradle%E7%AC%AC%E4%B8%89%E4%BE%9D%E8%B5%96%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2017-04-27T08:30:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android Studio Gradle 第三方依赖统一管理的几种方式</title>
+        <pubTime>2016-04-05T16:00:00.000Z</pubTime>
+        
+        <tag>Gradle</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android Studio" url="http://jkwarthegarden.com/categories/Android-Studio/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2016/04/26/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <lastmod>2017-04-27T08:29:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Fragment 详解（二）</title>
+        <pubTime>2016-04-25T16:00:00.000Z</pubTime>
+        
+        <tag>Fragment</tag>
+         
+         
+           
+             
+              <breadCrumb title="Fragment" url="http://jkwarthegarden.com/categories/Fragment/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2016/04/25/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <lastmod>2017-04-27T08:29:20.000Z</lastmod>
+    <data>
+        <display>
+        <title>Fragment 详解（一）</title>
+        <pubTime>2016-04-24T16:00:00.000Z</pubTime>
+        
+        <tag>Fragment</tag>
+         
+         
+           
+             
+              <breadCrumb title="Fragment" url="http://jkwarthegarden.com/categories/Fragment/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://jkwarthegarden.com/2016/04/27/Fragment%20%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <lastmod>2017-04-27T08:28:10.000Z</lastmod>
+    <data>
+        <display>
+        <title>Fragment 详解（三）</title>
+        <pubTime>2016-04-26T16:00:00.000Z</pubTime>
+        
+        <tag>Fragment</tag>
+         
+         
+           
+             
+              <breadCrumb title="Fragment" url="http://jkwarthegarden.com/categories/Fragment/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://jkwarthegarden.com/2016/05/20/Android%20%E5%90%AF%E7%94%A8Java8%E7%9A%84lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</loc>
     <lastmod>2017-04-19T07:38:59.000Z</lastmod>
     <data>
@@ -77,26 +157,6 @@
            
              
               <breadCrumb title="Activity" url="http://jkwarthegarden.com/categories/Activity/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://jkwarthegarden.com/2017/04/06/Android%20Studio%20Gradle%E7%AC%AC%E4%B8%89%E4%BE%9D%E8%B5%96%E7%BB%9F%E4%B8%80%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2017-04-06T11:35:23.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android Studio Gradle 第三方依赖统一管理的几种方式</title>
-        <pubTime>2017-04-06T11:33:00.000Z</pubTime>
-        
-        <tag>Gradle</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android Studio" url="http://jkwarthegarden.com/categories/Android-Studio/"/>
           
         </display>
     </data>
